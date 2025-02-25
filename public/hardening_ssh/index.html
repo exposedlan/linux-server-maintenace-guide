@@ -11,7 +11,7 @@ First thing we want is to do is disable root login on your machine. Before proce
 useradd -m &lt;user&gt;
 then create a STRONG password for it. You don&rsquo;t wan&rsquo;t someone to guess your password. I recommend a randomly generated password &#43; a password manager to store it.
 Next, we want to disable password authentication, we will authenticate using an SSH Key. This means that only computers with approved SSH keys will be able to connect.">
-	<meta name="keywords" content="SSH">
+	<meta name="keywords" content="SSH, Security">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="robots" content="index, follow">
 	<meta charset="utf-8">
@@ -19,7 +19,8 @@ Next, we want to disable password authentication, we will authenticate using an 
 <body>
 <nav>
     <ul>
-	<a href="/"><span class=pre></span><span class=menuname>◀️ Back to Home</span></a>
+        <a href="/"><span class=menuname>◀️ Back to Home</span></a><br><br>
+        <a href="/about"><span class=menuname>🔬 About</span></a>
     </ul>
 </nav>
 <main>
@@ -67,8 +68,8 @@ Next, we want to disable password authentication, we will authenticate using an 
 <p>Save the file, and restart <strong>sshd</strong> with:</p>
 <p><code>sudo systemctl reload sshd &amp;&amp; sudo systemctl restart sshd</code></p>
 <p>To verify that password auth has been disabled, we will try to connect to the server using this command which force password authentication:</p>
-<pre tabindex="0"><code>ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &lt;user&gt;@&lt;hostname&gt;
-</code></pre><p>It should return <strong>permission denied (publickey)</strong></p>
+<p><code>ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &lt;user&gt;@&lt;hostname&gt;</code></p>
+<p>It should return <strong>permission denied (publickey)</strong></p>
 <p><img src="/img/ssh-pw-access-denied.png" alt="ssh permission denied error"></p>
 <h1 id="ban-brute-forcing-ips">Ban brute-forcing IPs</h1>
 <p><sub><sup>source: <a href="https://wiki.archlinux.org/title/Fail2ban">Arch Wiki - Fail2ban</a></sub></sup></p>
@@ -98,7 +99,9 @@ enabled = true
 <h2 id="well-done-your-ssh-server-is-now-secured">Well done! Your SSH server is now secured!</h2>
 
 
-<div style="clear:both" class=taglist>Article tags:<br><a id="tag_ssh" href="http://localhost:1313/tags/ssh">SSH</a></div>
+<div id="nextprev"><a href="/basics-and-fundamentals/"><div id="nextart">Next:<br>Basics and Fundamentals</div></a>
+</div>
+<div style="clear:both" class=taglist>Article tags:<br><a id="tag_ssh" href="http://localhost:1313/tags/ssh">SSH</a> &middot; <a id="tag_security" href="http://localhost:1313/tags/security">Security</a></div>
 </article>
 </main>
 

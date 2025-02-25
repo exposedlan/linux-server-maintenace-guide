@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<title>Basics and Fundamentals | Linux Server Maintenance</title>
+	<link rel="canonical" href="http://localhost:1313/">
+	<link rel='alternate' type='application/rss+xml' title="Linux Server Maintenance RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+	<link rel="icon" href="/favicon.ico">
+	<meta name="description" content="
+The weakest part is always the person behind the computer. This page will ensure you have good security practices before doing any hardening.
+You&rsquo;ll be wasting your time Hardening your server if your password is 1234 😉
+Storing your passwords
+If you want to use a password manager, DON&rsquo;T USE ANY CLOUD BASED SERVICES: What&rsquo;s the point of having strong passwords if you store them on anyone else&rsquo;s computer? If you really want a remote password manager accessible from anywhere, I recommend Vaultwarden (which is a Bitwarden reimplementation)">
+	<meta name="keywords" content="Security">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+</head>
+<body>
+<nav>
+    <ul>
+        <a href="/"><span class=menuname>◀️ Back to Home</span></a><br><br>
+        <a href="/about"><span class=menuname>🔬 About</span></a>
+    </ul>
+</nav>
+<main>
+<header><h1 id="tag_Basics and Fundamentals">Basics and Fundamentals</h1></header>
+<article>
+
+<hr>
+<p>The weakest part is always the person behind the computer. This page will ensure you have good security practices before doing any hardening.</p>
+<p>You&rsquo;ll be wasting your time Hardening your server if your password is <strong>1234</strong> 😉</p>
+<h1 id="storing-your-passwords">Storing your passwords</h1>
+<p>If you want to use a password manager, <strong>DON&rsquo;T USE ANY CLOUD BASED SERVICES</strong>: What&rsquo;s the point of having strong passwords if you store them on anyone else&rsquo;s computer? If you really want a remote password manager accessible from anywhere, I recommend <strong>Vaultwarden</strong> (which is a <strong>Bitwarden</strong> reimplementation)</p>
+<p>IMO, something offline should be prefered, in this case, I recommend <strong>KeePassXC</strong>.</p>
+<h1 id="disabling-root-user-account">Disabling root user-account</h1>
+<p>You don&rsquo;t want to use the <em>root</em> user account directly, use <strong>sudo</strong> instead. It should be installed on most distribution, therefore if not, install it and execute: <code>sudo usermod -aG sudo &lt;user&gt;</code> This will add your user account to the <strong>sudo group</strong>, which allow you to use <strong>sudo</strong>.</p>
+<p>To disable root account without loosing root access through <em>sudo</em>, use: <code>passwd --lock root</code></p>
+<hr>
+
+
+<div id="nextprev">
+<a href="/hardening_ssh/"><div id="prevart">Previous:<br>Hardening SSH</div></a>
+<a href="/about/"><div id="nextart">Next:<br>About</div></a>
+</div>
+<div style="clear:both" class=taglist>Article tags:<br><a id="tag_security" href="http://localhost:1313/tags/security">Security</a></div>
+</article>
+</main>
+
+<footer>
+	<a href="http://localhost:1313/">http://localhost:1313/</a><br><br><a href="/index.xml"><img src="/rss.svg" style="max-height:1.5em" alt="RSS Feed" title="Subscribe via RSS for updates."></a>
+</footer>
+
+</body>
+</html>

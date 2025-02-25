@@ -1,7 +1,7 @@
 +++
 date = '2025-02-25T00:06:32+01:00'
 title = 'Hardening SSH'
-tags = ['SSH']
+tags = ['SSH', 'Security']
 draft = true
 +++
 ---
@@ -71,9 +71,7 @@ Save the file, and restart **sshd** with:
 
 To verify that password auth has been disabled, we will try to connect to the server using this command which force password authentication:
 
-```
-ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes <user>@<hostname>
-```
+`ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes <user>@<hostname>`
 
 It should return **permission denied (publickey)**
 

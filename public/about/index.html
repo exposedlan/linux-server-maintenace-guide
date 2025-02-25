@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<title>About | Linux Server Maintenance</title>
+	<link rel="canonical" href="http://localhost:1313/">
+	<link rel='alternate' type='application/rss+xml' title="Linux Server Maintenance RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+	<link rel="icon" href="/favicon.ico">
+	<meta name="description" content="
+Hi,
+i&rsquo;m a French person passionate about technology, IT and computers in general.
+I love tinkering with servers, Linux in general, Rimworld, Team Fortress 2 and cats.
+I personnaly own a Poweredge T320 &amp; a custom built NAS
+I don&rsquo;t work in IT, i&rsquo;m not a professional, I&rsquo;m just a hobbyist tinkering with his own servers, so take everything here with a grain of salt. I&rsquo;ll try to source my posts at best to let you do your own research.">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+</head>
+<body>
+<nav>
+    <ul>
+        <a href="/"><span class=menuname>◀️ Back to Home</span></a><br><br>
+        <a href="/about"><span class=menuname>🔬 About</span></a>
+    </ul>
+</nav>
+<main>
+<header><h1 id="tag_About">About</h1></header>
+<article>
+
+<hr>
+<h1 id="hi">Hi,</h1>
+<p>i&rsquo;m a French person passionate about technology, IT and computers in general.
+I love tinkering with servers, Linux in general, Rimworld, Team Fortress 2 and cats.<br>
+I personnaly own a Poweredge T320 &amp; a custom built NAS</p>
+<p><u>I don&rsquo;t work in IT, i&rsquo;m not a professional, I&rsquo;m just a hobbyist tinkering with his own servers, so take everything here with a grain of salt. I&rsquo;ll try to source my posts at best to let you do your own research.</u></p>
+<p>After more of a decade using Windows, I finally switch completely to Linux 3 years ago after tinkering with server distros for more than 2 years. I was using a laptop with broken screen as my home server at the time, therefore, I learned a lot about CLI at this time.</p>
+<p>I mostly familiar with <strong>Arch Linux</strong>, <strong>Debian</strong> (and <strong>DebianUnstable</strong>) and <strong>Ubuntu Server</strong> (like everyone else)<br>
+Honorable mention to <strong>Alpine Linux</strong>. I love it, it&rsquo;s a very good distribution, it&rsquo;s lightweight and very suitable for VMs.</p>
+<h1 id="computers-details">Computers Details</h1>
+<h3 id="main-desktop">Main desktop</h3>
+<ul>
+<li>Ryzen 5 3600</li>
+<li>48gb DDR4 2666MHz</li>
+<li>RTX 4060 (Main GPU)</li>
+<li><del>GTX 1660 SUPER (to passthrough inside VMs)</del></li>
+<li>1tb NVMe</li>
+<li>1tb HDD</li>
+<li>oh, and I use arch btw</li>
+</ul>
+<blockquote>
+<p>This setup don&rsquo;t work anymore as I upgraded my main GPU. In a nutshell, i&rsquo;m on AM4 socket, and it hasn&rsquo;t enough PCIe lanes, so my GPUs would run at PCIe 2x (for the RTX) and 4x (IIRC, for the GTX1660). I can&rsquo;t swap these because of <strong>iommu groups</strong> requiring me to also pass my ethernet adapter. It&rsquo;s easily resolvable by buying an Network Card, but I would not have enough PCIe ports and I don&rsquo;t want to use my 4060 at 2x.<br>
+I guess I&rsquo;ll go back to MacOS for my music production needs :)</p></blockquote>
+<p>Why passing a GPU to a VM ? mostly because I do music stuffs, and I don&rsquo;t like Linux DAWs at all <sub><sup>and I already had an FL Studio licence :)<br>
+<strong>(support developers if you love their products, especially if they offer lifetime update when every others don&rsquo;t ;)</strong> <br><br></sub></sup>
+And because it&rsquo;s very nice to have smooth VMs, I started using more with GPU, some to record videos, others to browse / use certains apps with VPNs (I find it easier to do &ldquo;split-tunneling&rdquo; that way instead of tinkering with <strong>iptables</strong>)</p>
+<h3 id="macbook---m1-pro">Macbook - M1 Pro</h3>
+<ul>
+<li>16gb RAM</li>
+<li>500gb SSD</li>
+</ul>
+<p>I use it when I travel (almost never) and to test apps &amp; stuff.<br>
+Before I bought a 2nd GPU, it was my main music production device.</p>
+<h1 id="servers-details">Servers details:</h1>
+<h3 id="poweredge-t320">Poweredge T320</h3>
+<ul>
+<li>Intel Xeon E5-2420 v2 @ 2.20GHz</li>
+<li>32GB DDR3</li>
+<li>4 x 3tb SAS HDD <em>(7k rpm)</em>
+<ul>
+<li>for data and backups, and I also seed Linux ISOs. Having OS, Docker and programs on a different HDD pool allows faster I/O performance for both the system and the file operations.</li>
+<li>RAID 5, approximately 9tb avail.</li>
+</ul>
+</li>
+<li>2 x 300gb SAS HDD <em>(15k rpm)</em>
+<ul>
+<li>mainly for OS &amp; programs, I watched some performance tests, IIRC two 15k HDD are not much slower compared to SATA SSDs</li>
+<li>RAID 0</li>
+</ul>
+</li>
+</ul>
+<p>This is my main server. I use it for backups, torrents, NAS, Docker&hellip; therefore it handles my 20+ container very well and it almost never reach half of CPU usage.<br><br>
+One reason I switched my apps from my NAS to this box is the price of SAS disks compared to SATA, for the price of 12tb of capacity (SAS, used), I could only buy 6tb of capacity (SATA, also used)<br>
+Anyways, I am very happy about it, yet it draws quite a bit of energy</p>
+<h3 id="custom-nas">Custom NAS</h3>
+<blockquote>
+<p>Now that I have a new GPU, I plan to using the GTX 1660 within the T320 and definitely shut down this crap.</p></blockquote>
+<ul>
+<li>Intel Core i7 6700</li>
+<li>16gb DDR4 <em>(It previously had 32 but two sticks died)</em></li>
+<li>2 x (2 x 1tb SATA HDD) including one that is dead
+<ul>
+<li>That was my first NAS, awful at every level. Main pool is degraded, the case is the cheapest on Amazon, so disks are lying inside on top of each others, one pool (SSD) contains just one disk and the remaining of the RAM is dying. Oh, and every part was bought used so two motherboards died until now :)</li>
+<li>two RAID 1 pools (~ 2tb avail.)</li>
+</ul>
+</li>
+<li>1 SDD - 500gb
+<ul>
+<li>It was mainly used for apps, now it&rsquo;s used as a fast network share as I don&rsquo;t have any other SSD on any of my other servers.</li>
+</ul>
+</li>
+</ul>
+<p><del>The only reason I still don&rsquo;t disconnect this monstruosity is Plex. I have no other GPU or CPU to replace the Core i7 for video transcoding. I think I will tranform it to a genuine Plex Box when I have enough money to buy at least two pair of HDD and a proper case.</del></p>
+<p>As explained above, I plan to definitely shut down this NAS, I&rsquo;ll reuse both SSDs used in it and I&rsquo;ll probably trash HDD lying inside. I bought them used more than 3 years ago, and 1tb drive is very little space considering SATA ports are not unlimited.</p>
+<hr>
+
+
+<div id="nextprev">
+<a href="/basics-and-fundamentals/"><div id="prevart">Previous:<br>Basics and Fundamentals</div></a>
+</div>
+<div style="clear:both" class=taglist>Article tags:<br><a id="tag_" href="http://localhost:1313/tags/"></a></div>
+</article>
+</main>
+
+<footer>
+	<a href="http://localhost:1313/">http://localhost:1313/</a><br><br><a href="/index.xml"><img src="/rss.svg" style="max-height:1.5em" alt="RSS Feed" title="Subscribe via RSS for updates."></a>
+</footer>
+
+</body>
+</html>

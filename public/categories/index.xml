@@ -10,6 +10,109 @@
 	
 	
 	<item>
+		<title>About</title>
+		<link>http://localhost:1313/about/</link>
+		<pubDate>Tue, 25 Feb 2025 17:08:53 +0100</pubDate>
+		
+		<guid>http://localhost:1313/about/</guid>
+		<description>&lt;hr&gt;
+&lt;h1 id=&#34;hi&#34;&gt;Hi,&lt;/h1&gt;
+&lt;p&gt;i&amp;rsquo;m a French person passionate about technology, IT and computers in general.
+I love tinkering with servers, Linux in general, Rimworld, Team Fortress 2 and cats.&lt;br&gt;
+I personnaly own a Poweredge T320 &amp;amp; a custom built NAS&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;I don&amp;rsquo;t work in IT, i&amp;rsquo;m not a professional, I&amp;rsquo;m just a hobbyist tinkering with his own servers, so take everything here with a grain of salt. I&amp;rsquo;ll try to source my posts at best to let you do your own research.&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;After more of a decade using Windows, I finally switch completely to Linux 3 years ago after tinkering with server distros for more than 2 years. I was using a laptop with broken screen as my home server at the time, therefore, I learned a lot about CLI at this time.&lt;/p&gt;
+&lt;p&gt;I mostly familiar with &lt;strong&gt;Arch Linux&lt;/strong&gt;, &lt;strong&gt;Debian&lt;/strong&gt; (and &lt;strong&gt;DebianUnstable&lt;/strong&gt;) and &lt;strong&gt;Ubuntu Server&lt;/strong&gt; (like everyone else)&lt;br&gt;
+Honorable mention to &lt;strong&gt;Alpine Linux&lt;/strong&gt;. I love it, it&amp;rsquo;s a very good distribution, it&amp;rsquo;s lightweight and very suitable for VMs.&lt;/p&gt;
+&lt;h1 id=&#34;computers-details&#34;&gt;Computers Details&lt;/h1&gt;
+&lt;h3 id=&#34;main-desktop&#34;&gt;Main desktop&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Ryzen 5 3600&lt;/li&gt;
+&lt;li&gt;48gb DDR4 2666MHz&lt;/li&gt;
+&lt;li&gt;RTX 4060 (Main GPU)&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;GTX 1660 SUPER (to passthrough inside VMs)&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;1tb NVMe&lt;/li&gt;
+&lt;li&gt;1tb HDD&lt;/li&gt;
+&lt;li&gt;oh, and I use arch btw&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This setup don&amp;rsquo;t work anymore as I upgraded my main GPU. In a nutshell, i&amp;rsquo;m on AM4 socket, and it hasn&amp;rsquo;t enough PCIe lanes, so my GPUs would run at PCIe 2x (for the RTX) and 4x (IIRC, for the GTX1660). I can&amp;rsquo;t swap these because of &lt;strong&gt;iommu groups&lt;/strong&gt; requiring me to also pass my ethernet adapter. It&amp;rsquo;s easily resolvable by buying an Network Card, but I would not have enough PCIe ports and I don&amp;rsquo;t want to use my 4060 at 2x.&lt;br&gt;
+I guess I&amp;rsquo;ll go back to MacOS for my music production needs :)&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Why passing a GPU to a VM ? mostly because I do music stuffs, and I don&amp;rsquo;t like Linux DAWs at all &lt;sub&gt;&lt;sup&gt;and I already had an FL Studio licence :)&lt;br&gt;
+&lt;strong&gt;(support developers if you love their products, especially if they offer lifetime update when every others don&amp;rsquo;t ;)&lt;/strong&gt; &lt;br&gt;&lt;br&gt;&lt;/sub&gt;&lt;/sup&gt;
+And because it&amp;rsquo;s very nice to have smooth VMs, I started using more with GPU, some to record videos, others to browse / use certains apps with VPNs (I find it easier to do &amp;ldquo;split-tunneling&amp;rdquo; that way instead of tinkering with &lt;strong&gt;iptables&lt;/strong&gt;)&lt;/p&gt;
+&lt;h3 id=&#34;macbook---m1-pro&#34;&gt;Macbook - M1 Pro&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;16gb RAM&lt;/li&gt;
+&lt;li&gt;500gb SSD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I use it when I travel (almost never) and to test apps &amp;amp; stuff.&lt;br&gt;
+Before I bought a 2nd GPU, it was my main music production device.&lt;/p&gt;
+&lt;h1 id=&#34;servers-details&#34;&gt;Servers details:&lt;/h1&gt;
+&lt;h3 id=&#34;poweredge-t320&#34;&gt;Poweredge T320&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel Xeon E5-2420 v2 @ 2.20GHz&lt;/li&gt;
+&lt;li&gt;32GB DDR3&lt;/li&gt;
+&lt;li&gt;4 x 3tb SAS HDD &lt;em&gt;(7k rpm)&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;for data and backups, and I also seed Linux ISOs. Having OS, Docker and programs on a different HDD pool allows faster I/O performance for both the system and the file operations.&lt;/li&gt;
+&lt;li&gt;RAID 5, approximately 9tb avail.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;2 x 300gb SAS HDD &lt;em&gt;(15k rpm)&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;mainly for OS &amp;amp; programs, I watched some performance tests, IIRC two 15k HDD are not much slower compared to SATA SSDs&lt;/li&gt;
+&lt;li&gt;RAID 0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is my main server. I use it for backups, torrents, NAS, Docker&amp;hellip; therefore it handles my 20+ container very well and it almost never reach half of CPU usage.&lt;br&gt;&lt;br&gt;
+One reason I switched my apps from my NAS to this box is the price of SAS disks compared to SATA, for the price of 12tb of capacity (SAS, used), I could only buy 6tb of capacity (SATA, also used)&lt;br&gt;
+Anyways, I am very happy about it, yet it draws quite a bit of energy&lt;/p&gt;
+&lt;h3 id=&#34;custom-nas&#34;&gt;Custom NAS&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now that I have a new GPU, I plan to using the GTX 1660 within the T320 and definitely shut down this crap.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel Core i7 6700&lt;/li&gt;
+&lt;li&gt;16gb DDR4 &lt;em&gt;(It previously had 32 but two sticks died)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;2 x (2 x 1tb SATA HDD) including one that is dead
+&lt;ul&gt;
+&lt;li&gt;That was my first NAS, awful at every level. Main pool is degraded, the case is the cheapest on Amazon, so disks are lying inside on top of each others, one pool (SSD) contains just one disk and the remaining of the RAM is dying. Oh, and every part was bought used so two motherboards died until now :)&lt;/li&gt;
+&lt;li&gt;two RAID 1 pools (~ 2tb avail.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;1 SDD - 500gb
+&lt;ul&gt;
+&lt;li&gt;It was mainly used for apps, now it&amp;rsquo;s used as a fast network share as I don&amp;rsquo;t have any other SSD on any of my other servers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;del&gt;The only reason I still don&amp;rsquo;t disconnect this monstruosity is Plex. I have no other GPU or CPU to replace the Core i7 for video transcoding. I think I will tranform it to a genuine Plex Box when I have enough money to buy at least two pair of HDD and a proper case.&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;As explained above, I plan to definitely shut down this NAS, I&amp;rsquo;ll reuse both SSDs used in it and I&amp;rsquo;ll probably trash HDD lying inside. I bought them used more than 3 years ago, and 1tb drive is very little space considering SATA ports are not unlimited.&lt;/p&gt;
+&lt;hr&gt;
+</description>
+	</item>
+	
+	<item>
+		<title>Basics and Fundamentals</title>
+		<link>http://localhost:1313/basics-and-fundamentals/</link>
+		<pubDate>Tue, 25 Feb 2025 15:55:52 +0100</pubDate>
+		
+		<guid>http://localhost:1313/basics-and-fundamentals/</guid>
+		<description>&lt;hr&gt;
+&lt;p&gt;The weakest part is always the person behind the computer. This page will ensure you have good security practices before doing any hardening.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ll be wasting your time Hardening your server if your password is &lt;strong&gt;1234&lt;/strong&gt; 😉&lt;/p&gt;
+&lt;h1 id=&#34;storing-your-passwords&#34;&gt;Storing your passwords&lt;/h1&gt;
+&lt;p&gt;If you want to use a password manager, &lt;strong&gt;DON&amp;rsquo;T USE ANY CLOUD BASED SERVICES&lt;/strong&gt;: What&amp;rsquo;s the point of having strong passwords if you store them on anyone else&amp;rsquo;s computer? If you really want a remote password manager accessible from anywhere, I recommend &lt;strong&gt;Vaultwarden&lt;/strong&gt; (which is a &lt;strong&gt;Bitwarden&lt;/strong&gt; reimplementation)&lt;/p&gt;
+&lt;p&gt;IMO, something offline should be prefered, in this case, I recommend &lt;strong&gt;KeePassXC&lt;/strong&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;disabling-root-user-account&#34;&gt;Disabling root user-account&lt;/h1&gt;
+&lt;p&gt;You don&amp;rsquo;t want to use the &lt;em&gt;root&lt;/em&gt; user account directly, use &lt;strong&gt;sudo&lt;/strong&gt; instead. It should be installed on most distribution, therefore if not, install it and execute: &lt;code&gt;sudo usermod -aG sudo &amp;lt;user&amp;gt;&lt;/code&gt; This will add your user account to the &lt;strong&gt;sudo group&lt;/strong&gt;, which allow you to use &lt;strong&gt;sudo&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To disable root account without loosing root access through &lt;em&gt;sudo&lt;/em&gt;, use: &lt;code&gt;passwd --lock root&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+</description>
+	</item>
+	
+	<item>
 		<title>Hardening SSH</title>
 		<link>http://localhost:1313/hardening_ssh/</link>
 		<pubDate>Tue, 25 Feb 2025 00:06:32 +0100</pubDate>
@@ -56,9 +159,34 @@
 &lt;p&gt;Save the file, and restart &lt;strong&gt;sshd&lt;/strong&gt; with:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;sudo systemctl reload sshd &amp;amp;&amp;amp; sudo systemctl restart sshd&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;To verify that password auth has been disabled, we will try to connect to the server using this command which force password authentication:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &amp;lt;user&amp;gt;@&amp;lt;hostname&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It should return &lt;strong&gt;permission denied (publickey)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &amp;lt;user&amp;gt;@&amp;lt;hostname&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;It should return &lt;strong&gt;permission denied (publickey)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/ssh-pw-access-denied.png&#34; alt=&#34;ssh permission denied error&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;ban-brute-forcing-ips&#34;&gt;Ban brute-forcing IPs&lt;/h1&gt;
+&lt;p&gt;&lt;sub&gt;&lt;sup&gt;source: &lt;a href=&#34;https://wiki.archlinux.org/title/Fail2ban&#34;&gt;Arch Wiki - Fail2ban&lt;/a&gt;&lt;/sub&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s well known that scripts which scans the entire internet trying to connect randomly to SSH servers exists. The second you open your SSH server to the  Internet, you&amp;rsquo;ll be spammed with bots trying to connect to your machine. To mitigate that, we can install a tool called &lt;strong&gt;fail2ban&lt;/strong&gt;. &lt;a href=&#34;https://github.com/fail2ban/fail2ban&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After installing, start and enable its service:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl enable --now fail2ban.service&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now create a &lt;strong&gt;/etc/fail2ban/jail.local&lt;/strong&gt; file. Alternatively, you can create separate configuration files inside &lt;strong&gt;/etc/fail2ban/jail.d/&lt;/strong&gt; folder.&lt;/p&gt;
+&lt;p&gt;Populate it with:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code class=&#34;conf&#34;&gt;[DEFAULT]
+bantime = 1d               # Ban time
+destemail = yourname@example.com
+sender = yourname@example.com
+
+# to ban &amp; send an e-mail with whois report to the destemail.
+action = %(action_mw)s
+
+# same as action_mw but also send relevant log lines
+#action = %(action_mwl)s
+
+[sshd]                            # Enable Jail for SSH server
+enabled = true
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;When you&amp;rsquo;re done editing configuration files, you need to reload &lt;strong&gt;fail2ban&lt;/strong&gt; using:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl reload fail2ban.service&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;well-done-your-ssh-server-is-now-secured&#34;&gt;Well done! Your SSH server is now secured!&lt;/h2&gt;
 </description>
 	</item>

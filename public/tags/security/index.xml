@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
 	<title>Linux Server Maintenance</title>
-	<link>http://localhost:1313/tags/</link>
-	<description>Recent content in Tags on Linux Server Maintenance</description>
+	<link>http://localhost:1313/tags/security/</link>
+	<description>Recent content in Security on Linux Server Maintenance</description>
 	<generator>Hugo -- gohugo.io</generator>
 	<language>en-us</language>
 	<lastBuildDate>Tue, 25 Feb 2025 15:55:52 +0100</lastBuildDate>
     
-        <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://localhost:1313/tags/security/index.xml" rel="self" type="application/rss+xml" />
 	
 	
 	<item>

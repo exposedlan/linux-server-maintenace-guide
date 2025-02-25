@@ -14,13 +14,19 @@ menus = 'main'
 - You should always follow the **principle of least privilege**: Components **SHOULD NOT** have access to anything <u>they don't require.</u>
 - You should always use **STRONG** passwords or passphrases. It should not be guessable.
 
+I recommend you to follow the guides by the order (from above to the bottom)
 
 # Guides
 
+#### [Basics and Fundamentals](/basics-and-fundamentals)
 #### [Hardening SSH](/hardening_ssh)
+
+---
 
 # Good resources
 
 #### [Arch Wiki - Security](https://wiki.archlinux.org/title/Security)
+
+---
 
 *English is not my first language, sorry for grammar errors.*
