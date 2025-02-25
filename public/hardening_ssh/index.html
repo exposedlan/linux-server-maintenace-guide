@@ -17,6 +17,11 @@ Next, we want to disable password authentication, we will authenticate using an 
 	<meta charset="utf-8">
 </head>
 <body>
+<nav>
+    <ul>
+	<a href="/"><span class=pre></span><span class=menuname>◀️ Back to Home</span></a>
+    </ul>
+</nav>
 <main>
 <header><h1 id="tag_Hardening SSH">Hardening SSH</h1></header>
 <article>
@@ -65,10 +70,10 @@ Next, we want to disable password authentication, we will authenticate using an 
 <pre tabindex="0"><code>ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &lt;user&gt;@&lt;hostname&gt;
 </code></pre><p>It should return <strong>permission denied (publickey)</strong></p>
 <p><img src="/img/ssh-pw-access-denied.png" alt="ssh permission denied error"></p>
-<hr>
+<h2 id="well-done-your-ssh-server-is-now-secured">Well done! Your SSH server is now secured!</h2>
 
 
-<div style="clear:both" class=taglist>Other posts with the same tags:<br><a id="tag_ssh" href="http://localhost:1313/tags/ssh">SSH</a></div>
+<div style="clear:both" class=taglist>Article tags:<br><a id="tag_ssh" href="http://localhost:1313/tags/ssh">SSH</a></div>
 </article>
 </main>
 
