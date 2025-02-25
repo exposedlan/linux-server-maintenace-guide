@@ -2,7 +2,7 @@
 date = '2025-02-25T00:06:32+01:00'
 title = 'Hardening SSH'
 tags = ['SSH', 'Security']
-draft = true
+draft = false
 +++
 ---
 First thing we want is to do is **disable root login** on your machine. Before proceeding, create a new user with the command:
@@ -16,6 +16,8 @@ Next, we want to **disable password authentication**, we will authenticate using
 
 
 To approve our key, we first need to create one.
+
+<br>
 
 # Generate SSH Keys
 ---
@@ -36,6 +38,8 @@ After answering a few questions, you should have these files in your **/home/\<u
 
 ![.ssh folder](/img/ssh-folder.png)
 
+<br>
+
 # Copy SSH Keys
 ---
 
@@ -48,6 +52,8 @@ The most easy way to copy your SSH Key into your server's **authorized_keys** fi
 `ssh-copy-id <user>@<hostname>`
 
 Now try to connect to your server using SSH, **now it should not ask for password to log-in.**
+
+<br>
 
 # Edit SSH Server configuration
 ---
@@ -76,6 +82,8 @@ To verify that password auth has been disabled, we will try to connect to the se
 It should return **permission denied (publickey)**
 
 ![ssh permission denied error](/img/ssh-pw-access-denied.png)
+
+<br>
 
 # Ban brute-forcing IPs
 <sub><sup>source: [Arch Wiki - Fail2ban](https://wiki.archlinux.org/title/Fail2ban)</sub></sup>

@@ -9,7 +9,9 @@
 	<meta name="description" content="
 The weakest part is always the person behind the computer. This page will ensure you have good security practices before doing any hardening.
 You&rsquo;ll be wasting your time Hardening your server if your password is 1234 😉
-Storing your passwords
+
+Store your passwords
+
 If you want to use a password manager, DON&rsquo;T USE ANY CLOUD BASED SERVICES: What&rsquo;s the point of having strong passwords if you store them on anyone else&rsquo;s computer? If you really want a remote password manager accessible from anywhere, I recommend Vaultwarden (which is a Bitwarden reimplementation)">
 	<meta name="keywords" content="Security">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,11 +32,29 @@ If you want to use a password manager, DON&rsquo;T USE ANY CLOUD BASED SERVICES:
 <hr>
 <p>The weakest part is always the person behind the computer. This page will ensure you have good security practices before doing any hardening.</p>
 <p>You&rsquo;ll be wasting your time Hardening your server if your password is <strong>1234</strong> 😉</p>
-<h1 id="storing-your-passwords">Storing your passwords</h1>
-<p>If you want to use a password manager, <strong>DON&rsquo;T USE ANY CLOUD BASED SERVICES</strong>: What&rsquo;s the point of having strong passwords if you store them on anyone else&rsquo;s computer? If you really want a remote password manager accessible from anywhere, I recommend <strong>Vaultwarden</strong> (which is a <strong>Bitwarden</strong> reimplementation)</p>
+<br>
+<h1 id="store-your-passwords">Store your passwords</h1>
+<hr>
+<p>If you want to use a password manager, <strong>DON&rsquo;T USE ANY CLOUD BASED SERVICES</strong>: What&rsquo;s the point of having strong passwords <u>if you store them on anyone else&rsquo;s computer?</u> If you really want a remote password manager accessible from anywhere, I recommend <strong>Vaultwarden</strong> (which is a <strong>Bitwarden</strong> reimplementation)</p>
 <p>IMO, something offline should be prefered, in this case, I recommend <strong>KeePassXC</strong>.</p>
-<h1 id="disabling-root-user-account">Disabling root user-account</h1>
-<p>You don&rsquo;t want to use the <em>root</em> user account directly, use <strong>sudo</strong> instead. It should be installed on most distribution, therefore if not, install it and execute: <code>sudo usermod -aG sudo &lt;user&gt;</code> This will add your user account to the <strong>sudo group</strong>, which allow you to use <strong>sudo</strong>.</p>
+<br>
+<h1 id="keep-your-system-up-to-date">Keep your system up-to-date</h1>
+<hr>
+<p>When upgrading your system bugs will be fixed and vulnerabilities will be patched. For a good security you should keep your systems updated.</p>
+<p>For <strong>Debian or derivatives (Ubuntu, etc..)</strong>:</p>
+<p><code>sudo apt update &amp;&amp; sudo apt dist-upgrade</code><br>
+<em>&lsquo;dist-upgrade&rsquo; allows installation of new packages when upgrading in opposite to &lsquo;upgrade&rsquo; which is not able to add or remove new packages. It is useful when upgraded packages gets new dependencies.</em></p>
+<p>For <strong>OpenSUSE</strong>:</p>
+<p><code>sudo zypper refresh &amp;&amp; sudo zypper update</code></p>
+<p>For <strong>Fedora, AlmaLinux, RHEL distros, etc..</strong>:</p>
+<p><code>sudo dnf upgrade --refresh</code><br>
+⚠️ <em>don&rsquo;t forget to reboot! as stated in the <a href="https://docs.fedoraproject.org/en-US/quick-docs/upgrading-fedora-offline/#sect-performing-system-upgrade">official documentation</a></em></p>
+<p>For <strong>Alpine Linux</strong>:</p>
+<p><code>sudo apk update &amp;&amp; sudo apk upgrade</code></p>
+<br>
+<h1 id="disable-root-user-account">Disable root user-account</h1>
+<hr>
+<p>You don&rsquo;t want to use the <em>root</em> user account directly, use <strong>sudo</strong> or <strong>doas</strong> instead. <strong>Sudo</strong> should be installed on most distribution, therefore if not, install it and execute: <code>sudo usermod -aG sudo &lt;user&gt;</code> This will add your user account to the <strong>sudo group</strong>, which allow you to use <strong>sudo</strong>.</p>
 <p>To disable root account without loosing root access through <em>sudo</em>, use: <code>passwd --lock root</code></p>
 <hr>
 

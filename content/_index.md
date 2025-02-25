@@ -26,6 +26,7 @@ I recommend you to follow the guides by the order (from above to the bottom)
 # Good resources
 
 #### [Arch Wiki - Security](https://wiki.archlinux.org/title/Security)
+#### [Arch Wiki - System Maintenance](https://wiki.archlinux.org/title/System_maintenance)
 
 ---
 

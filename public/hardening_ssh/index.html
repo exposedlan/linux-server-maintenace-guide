@@ -33,6 +33,7 @@ Next, we want to disable password authentication, we will authenticate using an 
 <p>then create a <strong>STRONG</strong> password for it. You don&rsquo;t wan&rsquo;t someone to guess your password. I recommend a randomly generated password + a password manager to store it.</p>
 <p>Next, we want to <strong>disable password authentication</strong>, we will authenticate using an <strong>SSH Key</strong>. This means that only computers with approved SSH keys will be able to connect.</p>
 <p>To approve our key, we first need to create one.</p>
+<br>
 <h1 id="generate-ssh-keys">Generate SSH Keys</h1>
 <hr>
 <p>If you have a file called <strong><em>&lt;something&gt;</em>.pub</strong> in your <strong>/home/&lt;user&gt;/.ssh</strong> folder, you can skip this section.</p>
@@ -44,6 +45,7 @@ Next, we want to disable password authentication, we will authenticate using an 
 <p><strong>Note that if you created a passphrase, you&rsquo;ll need to enter it at each connection.</strong></p></blockquote>
 <p>After answering a few questions, you should have these files in your <strong>/home/&lt;user&gt;/.ssh</strong> folder:</p>
 <p><img src="/img/ssh-folder.png" alt=".ssh folder"></p>
+<br>
 <h1 id="copy-ssh-keys">Copy SSH Keys</h1>
 <hr>
 <p>In the above screenshot, notice the file <strong>authorized_keys</strong>. <strong>Inside your server</strong>, this is where your client&rsquo;s key will reside.</p>
@@ -51,6 +53,7 @@ Next, we want to disable password authentication, we will authenticate using an 
 <p>The most easy way to copy your SSH Key into your server&rsquo;s <strong>authorized_keys</strong> file is to use the <strong>ssh-copy-id</strong> command:</p>
 <p><code>ssh-copy-id &lt;user&gt;@&lt;hostname&gt;</code></p>
 <p>Now try to connect to your server using SSH, <strong>now it should not ask for password to log-in.</strong></p>
+<br>
 <h1 id="edit-ssh-server-configuration">Edit SSH Server configuration</h1>
 <hr>
 <p>Now let&rsquo;s dive into the meat and potatoes. We will now disable password authentication.</p>
@@ -71,6 +74,7 @@ Next, we want to disable password authentication, we will authenticate using an 
 <p><code>ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &lt;user&gt;@&lt;hostname&gt;</code></p>
 <p>It should return <strong>permission denied (publickey)</strong></p>
 <p><img src="/img/ssh-pw-access-denied.png" alt="ssh permission denied error"></p>
+<br>
 <h1 id="ban-brute-forcing-ips">Ban brute-forcing IPs</h1>
 <p><sub><sup>source: <a href="https://wiki.archlinux.org/title/Fail2ban">Arch Wiki - Fail2ban</a></sub></sup></p>
 <p>It&rsquo;s well known that scripts which scans the entire internet trying to connect randomly to SSH servers exists. The second you open your SSH server to the  Internet, you&rsquo;ll be spammed with bots trying to connect to your machine. To mitigate that, we can install a tool called <strong>fail2ban</strong>. <a href="https://github.com/fail2ban/fail2ban">Github</a></p>
