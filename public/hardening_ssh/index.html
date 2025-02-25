@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<title>Hardening SSH | Linux Server Maintenance</title>
+	<link rel="canonical" href="http://localhost:1313/">
+	<link rel='alternate' type='application/rss+xml' title="Linux Server Maintenance RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+	<link rel="icon" href="/favicon.ico">
+	<meta name="description" content="
+First thing we want is to do is disable root login on your machine. Before proceeding, create a new user with the command:
+useradd -m &lt;user&gt;
+then create a STRONG password for it. You don&rsquo;t wan&rsquo;t someone to guess your password. I recommend a randomly generated password &#43; a password manager to store it.
+Next, we want to disable password authentication, we will authenticate using an SSH Key. This means that only computers with approved SSH keys will be able to connect.">
+	<meta name="keywords" content="SSH">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+</head>
+<body>
+<main>
+<header><h1 id="tag_Hardening SSH">Hardening SSH</h1></header>
+<article>
+
+<hr>
+<p>First thing we want is to do is <strong>disable root login</strong> on your machine. Before proceeding, create a new user with the command:</p>
+<p><code>useradd -m &lt;user&gt;</code></p>
+<p>then create a <strong>STRONG</strong> password for it. You don&rsquo;t wan&rsquo;t someone to guess your password. I recommend a randomly generated password + a password manager to store it.</p>
+<p>Next, we want to <strong>disable password authentication</strong>, we will authenticate using an <strong>SSH Key</strong>. This means that only computers with approved SSH keys will be able to connect.</p>
+<p>To approve our key, we first need to create one.</p>
+<h1 id="generate-ssh-keys">Generate SSH Keys</h1>
+<hr>
+<p>If you have a file called <strong><em>&lt;something&gt;</em>.pub</strong> in your <strong>/home/&lt;user&gt;/.ssh</strong> folder, you can skip this section.</p>
+<p>This section does not concern your server, everything explained here should be made on client computers, which means <strong>computers that WILL BE authorized to connect to your server.</strong></p>
+<p><img src="/img/ssh-key-based-authentication.png" alt="info card to explain how ssh key works."></p>
+<p>Let&rsquo;s generate an key pair using the command:</p>
+<p><code>ssh-keygen</code></p>
+<blockquote>
+<p><strong>Note that if you created a passphrase, you&rsquo;ll need to enter it at each connection.</strong></p></blockquote>
+<p>After answering a few questions, you should have these files in your <strong>/home/&lt;user&gt;/.ssh</strong> folder:</p>
+<p><img src="/img/ssh-folder.png" alt=".ssh folder"></p>
+<h1 id="copy-ssh-keys">Copy SSH Keys</h1>
+<hr>
+<p>In the above screenshot, notice the file <strong>authorized_keys</strong>. <strong>Inside your server</strong>, this is where your client&rsquo;s key will reside.</p>
+<p>Now that we have our key, still in the <strong>.ssh</strong> folder, you need to copy the content of <strong>&lt;something&gt;.pub</strong> <em>(in my case <strong>id_rsa.pub</strong>)</em> into the file <strong>/home/&lt;user&gt;/.ssh/authorized_keys</strong></p>
+<p>The most easy way to copy your SSH Key into your server&rsquo;s <strong>authorized_keys</strong> file is to use the <strong>ssh-copy-id</strong> command:</p>
+<p><code>ssh-copy-id &lt;user&gt;@&lt;hostname&gt;</code></p>
+<p>Now try to connect to your server using SSH, <strong>now it should not ask for password to log-in.</strong></p>
+<h1 id="edit-ssh-server-configuration">Edit SSH Server configuration</h1>
+<hr>
+<p>Now let&rsquo;s dive into the meat and potatoes. We will now disable password authentication.</p>
+<blockquote>
+<p>⚠️ Please be sure to properly set your keys in your server because once password auth is disabled, you could be locked outside. ⚠️</p></blockquote>
+<p>We will edit the configuration file located at <strong>/etc/ssh/sshd_config</strong>:</p>
+<ul>
+<li>Optional</li>
+<li>Uncomment &amp; change <em><strong>PermitRootLogin yes</strong></em> to <em><strong>PermitRootLogin no</strong></em></li>
+<li>Optional, but you can uncomment <em><strong>AllowUsers</strong></em> and add specific users which will be the only ones authorized to connect.</li>
+<li>Verify that the <em><strong>AuthorizedKeysFile</strong></em> line points to <em><strong>.ssh/authorized_keys</strong></em></li>
+<li>Uncomment &amp; change <em><strong>PasswordAuthentication yes</strong></em> to <em><strong>PasswordAuthentication no</strong></em></li>
+<li>Verify that the <em><strong>AuthenticationMethods</strong></em> line points to <em><strong>publickey</strong></em></li>
+</ul>
+<p>Save the file, and restart <strong>sshd</strong> with:</p>
+<p><code>sudo systemctl reload sshd &amp;&amp; sudo systemctl restart sshd</code></p>
+<p>To verify that password auth has been disabled, we will try to connect to the server using this command which force password authentication:</p>
+<pre tabindex="0"><code>ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &lt;user&gt;@&lt;hostname&gt;
+</code></pre><p>It should return <strong>permission denied (publickey)</strong></p>
+<p><img src="/img/ssh-pw-access-denied.png" alt="ssh permission denied error"></p>
+<hr>
+
+
+<div style="clear:both" class=taglist>Other posts with the same tags:<br><a id="tag_ssh" href="http://localhost:1313/tags/ssh">SSH</a></div>
+</article>
+</main>
+
+<footer>
+	<a href="http://localhost:1313/">http://localhost:1313/</a><br><br><a href="/index.xml"><img src="/rss.svg" style="max-height:1.5em" alt="RSS Feed" title="Subscribe via RSS for updates."></a>
+</footer>
+
+</body>
+</html>

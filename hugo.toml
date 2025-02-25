@@ -1,0 +1,26 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Linux Server Maintenance'
+theme = 'lugo'
+
+[module]
+  [[module.imports]]
+    path = 'github.com/LukeSmithxyz/lugo'
+
+[markup]
+  defaultMarkdownHandler = 'goldmark'
+
+
+[params]
+  # "relatedtext" is the text that appears above the tag list at the bottom of pages.
+  relatedtext = "Other posts with the same tags:"
+  favicon = "/favicon.ico"
+
+  #list items
+  datesinlist = true
+  authorsinlist = true
+
+  #footer items
+  nextprev = true
+  taglist = true
+  showrss = true

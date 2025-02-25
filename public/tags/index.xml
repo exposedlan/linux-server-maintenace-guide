@@ -1,0 +1,68 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+	<title>Linux Server Maintenance</title>
+	<link>http://localhost:1313/tags/</link>
+	<description>Recent content in Tags on Linux Server Maintenance</description>
+	<generator>Hugo -- gohugo.io</generator>
+	<language>en-us</language>
+	<lastBuildDate>Tue, 25 Feb 2025 00:06:32 +0100</lastBuildDate>
+    
+        <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+	
+	
+	<item>
+		<title>Hardening SSH</title>
+		<link>http://localhost:1313/hardening_ssh/</link>
+		<pubDate>Tue, 25 Feb 2025 00:06:32 +0100</pubDate>
+		
+		<guid>http://localhost:1313/hardening_ssh/</guid>
+		<description>&lt;hr&gt;
+&lt;p&gt;First thing we want is to do is &lt;strong&gt;disable root login&lt;/strong&gt; on your machine. Before proceeding, create a new user with the command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;useradd -m &amp;lt;user&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;then create a &lt;strong&gt;STRONG&lt;/strong&gt; password for it. You don&amp;rsquo;t wan&amp;rsquo;t someone to guess your password. I recommend a randomly generated password + a password manager to store it.&lt;/p&gt;
+&lt;p&gt;Next, we want to &lt;strong&gt;disable password authentication&lt;/strong&gt;, we will authenticate using an &lt;strong&gt;SSH Key&lt;/strong&gt;. This means that only computers with approved SSH keys will be able to connect.&lt;/p&gt;
+&lt;p&gt;To approve our key, we first need to create one.&lt;/p&gt;
+&lt;h1 id=&#34;generate-ssh-keys&#34;&gt;Generate SSH Keys&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;If you have a file called &lt;strong&gt;&lt;em&gt;&amp;lt;something&amp;gt;&lt;/em&gt;.pub&lt;/strong&gt; in your &lt;strong&gt;/home/&amp;lt;user&amp;gt;/.ssh&lt;/strong&gt; folder, you can skip this section.&lt;/p&gt;
+&lt;p&gt;This section does not concern your server, everything explained here should be made on client computers, which means &lt;strong&gt;computers that WILL BE authorized to connect to your server.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/ssh-key-based-authentication.png&#34; alt=&#34;info card to explain how ssh key works.&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s generate an key pair using the command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh-keygen&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note that if you created a passphrase, you&amp;rsquo;ll need to enter it at each connection.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;After answering a few questions, you should have these files in your &lt;strong&gt;/home/&amp;lt;user&amp;gt;/.ssh&lt;/strong&gt; folder:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/ssh-folder.png&#34; alt=&#34;.ssh folder&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;copy-ssh-keys&#34;&gt;Copy SSH Keys&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;In the above screenshot, notice the file &lt;strong&gt;authorized_keys&lt;/strong&gt;. &lt;strong&gt;Inside your server&lt;/strong&gt;, this is where your client&amp;rsquo;s key will reside.&lt;/p&gt;
+&lt;p&gt;Now that we have our key, still in the &lt;strong&gt;.ssh&lt;/strong&gt; folder, you need to copy the content of &lt;strong&gt;&amp;lt;something&amp;gt;.pub&lt;/strong&gt; &lt;em&gt;(in my case &lt;strong&gt;id_rsa.pub&lt;/strong&gt;)&lt;/em&gt; into the file &lt;strong&gt;/home/&amp;lt;user&amp;gt;/.ssh/authorized_keys&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The most easy way to copy your SSH Key into your server&amp;rsquo;s &lt;strong&gt;authorized_keys&lt;/strong&gt; file is to use the &lt;strong&gt;ssh-copy-id&lt;/strong&gt; command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh-copy-id &amp;lt;user&amp;gt;@&amp;lt;hostname&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now try to connect to your server using SSH, &lt;strong&gt;now it should not ask for password to log-in.&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;edit-ssh-server-configuration&#34;&gt;Edit SSH Server configuration&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;Now let&amp;rsquo;s dive into the meat and potatoes. We will now disable password authentication.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️ Please be sure to properly set your keys in your server because once password auth is disabled, you could be locked outside. ⚠️&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;We will edit the configuration file located at &lt;strong&gt;/etc/ssh/sshd_config&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Optional&lt;/li&gt;
+&lt;li&gt;Uncomment &amp;amp; change &lt;em&gt;&lt;strong&gt;PermitRootLogin yes&lt;/strong&gt;&lt;/em&gt; to &lt;em&gt;&lt;strong&gt;PermitRootLogin no&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Optional, but you can uncomment &lt;em&gt;&lt;strong&gt;AllowUsers&lt;/strong&gt;&lt;/em&gt; and add specific users which will be the only ones authorized to connect.&lt;/li&gt;
+&lt;li&gt;Verify that the &lt;em&gt;&lt;strong&gt;AuthorizedKeysFile&lt;/strong&gt;&lt;/em&gt; line points to &lt;em&gt;&lt;strong&gt;.ssh/authorized_keys&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Uncomment &amp;amp; change &lt;em&gt;&lt;strong&gt;PasswordAuthentication yes&lt;/strong&gt;&lt;/em&gt; to &lt;em&gt;&lt;strong&gt;PasswordAuthentication no&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Verify that the &lt;em&gt;&lt;strong&gt;AuthenticationMethods&lt;/strong&gt;&lt;/em&gt; line points to &lt;em&gt;&lt;strong&gt;publickey&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Save the file, and restart &lt;strong&gt;sshd&lt;/strong&gt; with:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl reload sshd &amp;amp;&amp;amp; sudo systemctl restart sshd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To verify that password auth has been disabled, we will try to connect to the server using this command which force password authentication:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &amp;lt;user&amp;gt;@&amp;lt;hostname&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It should return &lt;strong&gt;permission denied (publickey)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/ssh-pw-access-denied.png&#34; alt=&#34;ssh permission denied error&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+</description>
+	</item>
+	
+	</channel>
+</rss>
