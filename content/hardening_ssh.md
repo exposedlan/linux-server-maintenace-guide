@@ -79,4 +79,5 @@ It should return **permission denied (publickey)**
 
 ![ssh permission denied error](/img/ssh-pw-access-denied.png)
 
+Well done! Your SSH server is now secured!
 ---
