@@ -12,6 +12,8 @@ menus = 'main'
 - Keep in mind that some commands could change from a distribution to another.
 - As always, replace **\<user\>** by your username and **\<hostame\>** with your server's IP or URL.
 - You should always follow the **principle of least privilege**: Components **SHOULD NOT** have access to anything <u>they don't require.</u>
+- You should always use **STRONG** passwords or passphrases. It should not be guessable.
+
 
 # Guides
 

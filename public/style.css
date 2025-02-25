@@ -1,6 +1,6 @@
 body {
 	font-family: sans-serif ;
-	background: #110000 ;
+	background: #180000 ;
 	color: #ccc ;
 }
 
@@ -28,16 +28,22 @@ strong{
 }
 
 code:before {
-	content: "# "
+	content: "# ";
 }
 
 code{
-	margin: 5px; 			/* Fix outline causing code block to misalign with text*/
-	outline-style: solid;
-	outline-width: thin;
-	outline-offset: 5px;
-	color: white;
-	font-size: 16px
+	font-family: 'monospace';
+	display: block;
+	background: #272525;
+	word-wrap: break-word;
+	box-decoration-break: clone;
+	padding: .1rem .3rem .2rem;
+	border-radius: .2rem;
+	content: "";
+}
+
+.conf:before{
+	content: inherit;
 }
 
 blockquote{

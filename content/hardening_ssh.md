@@ -79,5 +79,39 @@ It should return **permission denied (publickey)**
 
 ![ssh permission denied error](/img/ssh-pw-access-denied.png)
 
+# Ban brute-forcing IPs
+<sub><sup>source: [Arch Wiki - Fail2ban](https://wiki.archlinux.org/title/Fail2ban)</sub></sup>
+
+It's well known that scripts which scans the entire internet trying to connect randomly to SSH servers exists. The second you open your SSH server to the  Internet, you'll be spammed with bots trying to connect to your machine. To mitigate that, we can install a tool called **fail2ban**. [Github](https://github.com/fail2ban/fail2ban)
+
+After installing, start and enable its service:
+
+`sudo systemctl enable --now fail2ban.service`
+
+Now create a **/etc/fail2ban/jail.local** file. Alternatively, you can create separate configuration files inside **/etc/fail2ban/jail.d/** folder.
+
+Populate it with:
+
+<pre>
+<code class="conf">[DEFAULT]
+bantime = 1d               # Ban time
+destemail = yourname@example.com
+sender = yourname@example.com
+
+# to ban & send an e-mail with whois report to the destemail.
+action = %(action_mw)s
+
+# same as action_mw but also send relevant log lines
+#action = %(action_mwl)s
+
+[sshd]                            # Enable Jail for SSH server
+enabled = true
+</code>
+</pre>
+
+When you're done editing configuration files, you need to reload **fail2ban** using:
+
+`sudo systemctl reload fail2ban.service`
+
 Well done! Your SSH server is now secured!
 ---

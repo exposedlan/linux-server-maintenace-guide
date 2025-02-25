@@ -70,6 +70,31 @@ Next, we want to disable password authentication, we will authenticate using an 
 <pre tabindex="0"><code>ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &lt;user&gt;@&lt;hostname&gt;
 </code></pre><p>It should return <strong>permission denied (publickey)</strong></p>
 <p><img src="/img/ssh-pw-access-denied.png" alt="ssh permission denied error"></p>
+<h1 id="ban-brute-forcing-ips">Ban brute-forcing IPs</h1>
+<p><sub><sup>source: <a href="https://wiki.archlinux.org/title/Fail2ban">Arch Wiki - Fail2ban</a></sub></sup></p>
+<p>It&rsquo;s well known that scripts which scans the entire internet trying to connect randomly to SSH servers exists. The second you open your SSH server to the  Internet, you&rsquo;ll be spammed with bots trying to connect to your machine. To mitigate that, we can install a tool called <strong>fail2ban</strong>. <a href="https://github.com/fail2ban/fail2ban">Github</a></p>
+<p>After installing, start and enable its service:</p>
+<p><code>sudo systemctl enable --now fail2ban.service</code></p>
+<p>Now create a <strong>/etc/fail2ban/jail.local</strong> file. Alternatively, you can create separate configuration files inside <strong>/etc/fail2ban/jail.d/</strong> folder.</p>
+<p>Populate it with:</p>
+<pre>
+<code class="conf">[DEFAULT]
+bantime = 1d               # Ban time
+destemail = yourname@example.com
+sender = yourname@example.com
+
+# to ban & send an e-mail with whois report to the destemail.
+action = %(action_mw)s
+
+# same as action_mw but also send relevant log lines
+#action = %(action_mwl)s
+
+[sshd]                            # Enable Jail for SSH server
+enabled = true
+</code>
+</pre>
+<p>When you&rsquo;re done editing configuration files, you need to reload <strong>fail2ban</strong> using:</p>
+<p><code>sudo systemctl reload fail2ban.service</code></p>
 <h2 id="well-done-your-ssh-server-is-now-secured">Well done! Your SSH server is now secured!</h2>
 
 

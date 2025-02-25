@@ -60,6 +60,31 @@
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &amp;lt;user&amp;gt;@&amp;lt;hostname&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It should return &lt;strong&gt;permission denied (publickey)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/ssh-pw-access-denied.png&#34; alt=&#34;ssh permission denied error&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;ban-brute-forcing-ips&#34;&gt;Ban brute-forcing IPs&lt;/h1&gt;
+&lt;p&gt;&lt;sub&gt;&lt;sup&gt;source: &lt;a href=&#34;https://wiki.archlinux.org/title/Fail2ban&#34;&gt;Arch Wiki - Fail2ban&lt;/a&gt;&lt;/sub&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s well known that scripts which scans the entire internet trying to connect randomly to SSH servers exists. The second you open your SSH server to the  Internet, you&amp;rsquo;ll be spammed with bots trying to connect to your machine. To mitigate that, we can install a tool called &lt;strong&gt;fail2ban&lt;/strong&gt;. &lt;a href=&#34;https://github.com/fail2ban/fail2ban&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After installing, start and enable its service:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl enable --now fail2ban.service&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now create a &lt;strong&gt;/etc/fail2ban/jail.local&lt;/strong&gt; file. Alternatively, you can create separate configuration files inside &lt;strong&gt;/etc/fail2ban/jail.d/&lt;/strong&gt; folder.&lt;/p&gt;
+&lt;p&gt;Populate it with:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code class=&#34;conf&#34;&gt;[DEFAULT]
+bantime = 1d               # Ban time
+destemail = yourname@example.com
+sender = yourname@example.com
+
+# to ban &amp; send an e-mail with whois report to the destemail.
+action = %(action_mw)s
+
+# same as action_mw but also send relevant log lines
+#action = %(action_mwl)s
+
+[sshd]                            # Enable Jail for SSH server
+enabled = true
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;When you&amp;rsquo;re done editing configuration files, you need to reload &lt;strong&gt;fail2ban&lt;/strong&gt; using:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl reload fail2ban.service&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;well-done-your-ssh-server-is-now-secured&#34;&gt;Well done! Your SSH server is now secured!&lt;/h2&gt;
 </description>
 	</item>
