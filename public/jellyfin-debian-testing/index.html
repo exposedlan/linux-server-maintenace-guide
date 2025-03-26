@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<title>Install Jellyfin on Debian Testing Without Docker | Linux Server Maintenance</title>
+	<link rel="canonical" href="http://localhost:1313/">
+	<link rel='alternate' type='application/rss+xml' title="Linux Server Maintenance RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+	<link rel="icon" href="/favicon.ico">
+	<meta name="description" content="
+I&rsquo;m using Debian Testing in my Server (I know, I know..), if you&rsquo;re using it like me, you&rsquo;ll notice that you can&rsquo;t install jellyfin using apt because it&rsquo;s not supported and some dependencies are not met.
+This is not an issue, we can install these manually.
+Installing Jellyfin&rsquo;s APT repository
+
+First, download and install the GPG signing key of Jellyfin&rsquo;s Team:
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/jellyfin.gpg">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+</head>
+<body>
+<nav>
+    <ul>
+        <a href="/"><span class=menuname>◀️ Back to Home</span></a><br><br>
+        <a href="/about"><span class=menuname>🔬 About</span></a>
+    </ul>
+</nav>
+<main>
+<header><h1 id="tag_Install Jellyfin on Debian Testing without Docker">Install Jellyfin on Debian Testing without Docker</h1></header>
+<article>
+
+<hr>
+<p>I&rsquo;m using Debian Testing in my Server (I know, I know..), if you&rsquo;re using it like me, you&rsquo;ll notice that you can&rsquo;t install jellyfin using apt because it&rsquo;s not supported and some dependencies are not met.</p>
+<p>This is not an issue, we can install these manually.</p>
+<h1 id="installing-jellyfins-apt-repository">Installing Jellyfin&rsquo;s APT repository</h1>
+<hr>
+<p>First, download and install the GPG signing key of Jellyfin&rsquo;s Team:</p>
+<p><code>sudo mkdir -p /etc/apt/keyrings</code></p>
+<p><code>curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/jellyfin.gpg</code></p>
+<p>Then, create <code>/etc/apt/sources.list.d/jellyfin.sources</code></p>
+<p>Add:</p>
+<pre>
+<code class="conf">[DEFAULT]
+Types: deb
+URIs: https://repo.jellyfin.org/debian
+Suites: bookworm
+Components: main
+Architectures: amd64
+Signed-By: /etc/apt/keyrings/jellyfin.gpg
+</code>
+</pre>
+<blockquote>
+<p>⚠️  Notice the <strong>&ldquo;Suites&rdquo;</strong> line. We must use <strong>&ldquo;bookworm&rdquo;</strong> instead of trixie (current debian testing). In the future change <strong>bookworm</strong> to the latest supported Debian <strong>STABLE</strong>. ⚠️</p></blockquote>
+<p>Now you can do
+<code>sudo apt update</code>
+There should be no issue.</p>
+<h1 id="installation">Installation</h1>
+<hr>
+<p>If you try installing Jellyfin now, you&rsquo;ll miss 3 dependencies:</p>
+<ul>
+<li>libvpx7</li>
+<li>libx265</li>
+<li>libllvm16</li>
+</ul>
+<p>Download them using <strong>wget</strong>:
+<code>wget http://ftp.de.debian.org/debian/pool/main/libv/libvpx/libvpx7_1.12.0-1+deb12u3_amd64.deb</code></p>
+<p><code>wget http://ftp.de.debian.org/debian/pool/main/x/x265/libx265-199_3.5-2+b1_amd64.deb</code></p>
+<p><code>wget http://ftp.de.debian.org/debian/pool/main/l/llvm-toolchain-16/libllvm16_16.0.6-15~deb12u1_amd64.deb</code></p>
+<blockquote>
+<p>⚠️  These are direct links from early 2025, search <a href="https://www.debian.org/distrib/packages#view">debian.org/distrib/packages</a> for updated packages. ⚠️</p></blockquote>
+<p>And install them using <strong>dpkg -i</strong>:</p>
+<p><code>sudo dpkg -i libvpx7_1.12.0-1+deb12u3_amd64.deb</code></p>
+<p><code>sudo dpkg -i libx265-199_3.5-2+b1_amd64.deb</code></p>
+<p><code>sudo dkpg -i libllvm16_16.0.6-15~deb12u1_amd64.deb</code></p>
+<p>You should now be able to install <strong>Jellyfin</strong> using:</p>
+<p><code>sudo apt install jellyfin</code></p>
+<p>Which is a group, it installs <strong>jellyfin-ffmpeg7</strong>, <strong>jellyfin-server</strong> and <strong>jellyfin-web</strong>.</p>
+<hr>
+
+
+<div id="nextprev">
+<a href="/about/"><div id="prevart">Previous:<br>About</div></a>
+</div>
+<div style="clear:both" class=taglist>Article tags:<br><a id="tag_" href="http://localhost:1313/tags/"></a></div>
+</article>
+</main>
+
+<footer>
+	<a href="http://localhost:1313/">http://localhost:1313/</a><br><br><a href="/index.xml"><img src="/rss.svg" style="max-height:1.5em" alt="RSS Feed" title="Subscribe via RSS for updates."></a>
+</footer>
+
+</body>
+</html>

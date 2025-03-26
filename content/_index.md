@@ -9,7 +9,7 @@ menus = 'main'
 ## You're at the right place.
 ---
 
-- Keep in mind that some commands could change from a distribution to another.
+- Keep in mind that some commands could change from a distribution to another, especially for package managers.
 - As always, replace **\<user\>** by your username and **\<hostame\>** with your server's IP or URL.
 - You should always follow the **principle of least privilege**: Components **SHOULD NOT** have access to anything <u>they don't require.</u>
 - You should always use **STRONG** passwords or passphrases. It should not be guessable.
@@ -20,6 +20,10 @@ I recommend you to follow the guides by the order (from above to the bottom)
 
 #### [Basics and Fundamentals](/basics-and-fundamentals)
 #### [Hardening SSH](/hardening_ssh)
+
+# Misc. Guides
+
+#### [Install Jellyfin on Debian Testing without Docker](/jellyfin-debian-testing)
 
 ---
 
