@@ -1,7 +1,8 @@
-#baseURL = 'https://chopprr.cc/'
+baseURL = 'https://chopprr.cc/'
 languageCode = 'en-us'
 title = 'Linux Server Maintenance'
 theme = ['lugo', 'matomo']
+disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 # Theme used
 [module]
@@ -20,6 +21,10 @@ sectionPagesMenu = 'main'
 # Theme configuration
 [params]
   github = "https://github.com/exposedlan/linux-server-maintenace-guide"
+
+  # Max tags
+  maxTags = 7
+
   # "relatedtext" is the text that appears above the tag list at the bottom of pages.
   relatedtext = "Article tags:"
   favicon = "/favicon.ico"
