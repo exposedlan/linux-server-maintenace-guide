@@ -1,4 +1,4 @@
-baseURL = 'https://chopprr.cc/'
+#baseURL = 'https://chopprr.cc/'
 languageCode = 'en-us'
 title = 'Linux Server Maintenance'
 theme = ['lugo', 'matomo']
