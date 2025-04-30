@@ -10,6 +10,28 @@
 	
 	
 	<item>
+		<title>Privacy</title>
+		<link>http://localhost:1313/privacy/</link>
+		<pubDate>Wed, 30 Apr 2025 17:45:52 +0200</pubDate>
+		
+		<guid>http://localhost:1313/privacy/</guid>
+		<description>&lt;hr&gt;
+&lt;p&gt;Matomo is used to collect anonymous statistics about this website.&lt;/p&gt;
+&lt;div class=&#34;MatomoOptout&#34;&gt;
+&lt;script data-id=&#34;promise-polyfill&#34; data-promise-polyfill-url=&#34;http://localhost:1313/js/es6-promise.auto.min.f2a14fbc03102e3f6139790da043b488e5d0c76b47c80f175a4ca6e4edddc6a3.js&#34; src=&#34;http://localhost:1313/js/promise-polyfill.min.159647c35ccb9da71d294095829881a9bbd38cc07f0fbf5df5c09e844cc3082d.js&#34;  defer&gt;&lt;/script&gt;
+&lt;script data-id=&#34;matomo-optout&#34; data-matomo-optout-url=&#34;https://analytics.chopprr.cc/&#34; src=&#34;http://localhost:1313/js/matomo-optout.js&#34; defer&gt;&lt;/script&gt;
+&lt;link rel=&#34;stylesheet&#34; href=&#34;http://localhost:1313/css/matomo-optout.css&#34;&gt;
+&lt;div class=&#34;MatomoOptout-message MatomoOptout-message--track is-hidden&#34;&gt;You are being watched.&lt;/div&gt;
+&lt;div class=&#34;MatomoOptout-message MatomoOptout-message--block&#34;&gt;You are not tracked.&lt;/div&gt;
+&lt;button class=&#34;MatomoOptout-button MatomoOptout-button--track&#34;&gt;Allow tracking&lt;/button&gt; 
+&lt;button class=&#34;MatomoOptout-button MatomoOptout-button--block&#34;&gt;Disable tracking&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+</description>
+	</item>
+	
+	<item>
 		<title>Install Jellyfin on Debian Testing without Docker</title>
 		<link>http://localhost:1313/jellyfin-debian-testing/</link>
 		<pubDate>Wed, 26 Mar 2025 13:00:56 +0100</pubDate>

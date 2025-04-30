@@ -11,6 +11,84 @@
 	
 	
 	<item>
+		<title>Privacy</title>
+		<link>http://localhost:1313/privacy/</link>
+		<pubDate>Wed, 30 Apr 2025 17:45:52 +0200</pubDate>
+		
+		<guid>http://localhost:1313/privacy/</guid>
+		<description>&lt;hr&gt;
+&lt;p&gt;Matomo is used to collect anonymous statistics about this website.&lt;/p&gt;
+&lt;div class=&#34;MatomoOptout&#34;&gt;
+&lt;script data-id=&#34;promise-polyfill&#34; data-promise-polyfill-url=&#34;http://localhost:1313/js/es6-promise.auto.min.f2a14fbc03102e3f6139790da043b488e5d0c76b47c80f175a4ca6e4edddc6a3.js&#34; src=&#34;http://localhost:1313/js/promise-polyfill.min.159647c35ccb9da71d294095829881a9bbd38cc07f0fbf5df5c09e844cc3082d.js&#34;  defer&gt;&lt;/script&gt;
+&lt;script data-id=&#34;matomo-optout&#34; data-matomo-optout-url=&#34;https://analytics.chopprr.cc/&#34; src=&#34;http://localhost:1313/js/matomo-optout.js&#34; defer&gt;&lt;/script&gt;
+&lt;link rel=&#34;stylesheet&#34; href=&#34;http://localhost:1313/css/matomo-optout.css&#34;&gt;
+&lt;div class=&#34;MatomoOptout-message MatomoOptout-message--track is-hidden&#34;&gt;You are being watched.&lt;/div&gt;
+&lt;div class=&#34;MatomoOptout-message MatomoOptout-message--block&#34;&gt;You are not tracked.&lt;/div&gt;
+&lt;button class=&#34;MatomoOptout-button MatomoOptout-button--track&#34;&gt;Allow tracking&lt;/button&gt; 
+&lt;button class=&#34;MatomoOptout-button MatomoOptout-button--block&#34;&gt;Disable tracking&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+</description>
+	</item>
+	
+	<item>
+		<title>Install Jellyfin on Debian Testing without Docker</title>
+		<link>http://localhost:1313/jellyfin-debian-testing/</link>
+		<pubDate>Wed, 26 Mar 2025 13:00:56 +0100</pubDate>
+		
+		<guid>http://localhost:1313/jellyfin-debian-testing/</guid>
+		<description>&lt;hr&gt;
+&lt;p&gt;I&amp;rsquo;m using Debian Testing in my Server (I know, I know..), if you&amp;rsquo;re using it like me, you&amp;rsquo;ll notice that you can&amp;rsquo;t install jellyfin using apt because it&amp;rsquo;s not supported and some dependencies are not met.&lt;/p&gt;
+&lt;p&gt;This is not an issue, we can install these manually.&lt;/p&gt;
+&lt;h1 id=&#34;installing-jellyfins-apt-repository&#34;&gt;Installing Jellyfin&amp;rsquo;s APT repository&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;First, download and install the GPG signing key of Jellyfin&amp;rsquo;s Team:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo mkdir -p /etc/apt/keyrings&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/jellyfin.gpg&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Then, create &lt;code&gt;/etc/apt/sources.list.d/jellyfin.sources&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Add:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code class=&#34;conf&#34;&gt;[DEFAULT]
+Types: deb
+URIs: https://repo.jellyfin.org/debian
+Suites: bookworm
+Components: main
+Architectures: amd64
+Signed-By: /etc/apt/keyrings/jellyfin.gpg
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️  Notice the &lt;strong&gt;&amp;ldquo;Suites&amp;rdquo;&lt;/strong&gt; line. We must use &lt;strong&gt;&amp;ldquo;bookworm&amp;rdquo;&lt;/strong&gt; instead of trixie (current debian testing). In the future change &lt;strong&gt;bookworm&lt;/strong&gt; to the latest supported Debian &lt;strong&gt;STABLE&lt;/strong&gt;. ⚠️&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Now you can do
+&lt;code&gt;sudo apt update&lt;/code&gt;
+There should be no issue.&lt;/p&gt;
+&lt;h1 id=&#34;installation&#34;&gt;Installation&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;If you try installing Jellyfin now, you&amp;rsquo;ll miss 3 dependencies:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;libvpx7&lt;/li&gt;
+&lt;li&gt;libx265&lt;/li&gt;
+&lt;li&gt;libllvm16&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Download them using &lt;strong&gt;wget&lt;/strong&gt;:
+&lt;code&gt;wget http://ftp.de.debian.org/debian/pool/main/libv/libvpx/libvpx7_1.12.0-1+deb12u3_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wget http://ftp.de.debian.org/debian/pool/main/x/x265/libx265-199_3.5-2+b1_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wget http://ftp.de.debian.org/debian/pool/main/l/llvm-toolchain-16/libllvm16_16.0.6-15~deb12u1_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️  These are direct links from early 2025, search &lt;a href=&#34;https://www.debian.org/distrib/packages#view&#34;&gt;debian.org/distrib/packages&lt;/a&gt; for updated packages. ⚠️&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;And install them using &lt;strong&gt;dpkg -i&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dpkg -i libvpx7_1.12.0-1+deb12u3_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dpkg -i libx265-199_3.5-2+b1_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dkpg -i libllvm16_16.0.6-15~deb12u1_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You should now be able to install &lt;strong&gt;Jellyfin&lt;/strong&gt; using:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt install jellyfin&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Which is a group, it installs &lt;strong&gt;jellyfin-ffmpeg7&lt;/strong&gt;, &lt;strong&gt;jellyfin-server&lt;/strong&gt; and &lt;strong&gt;jellyfin-web&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+</description>
+	</item>
+	
+	<item>
 		<title>About</title>
 		<link>http://localhost:1313/about/</link>
 		<pubDate>Tue, 25 Feb 2025 17:08:53 +0100</pubDate>

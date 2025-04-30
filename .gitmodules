@@ -1,3 +1,6 @@
 [submodule "lugo"]
 	path = themes/lugo
 	url = https://github.com/lukesmithxyz/lugo
+[submodule "themes/matomo"]
+	path = themes/matomo
+	url = https://github.com/holehan/hugo-components-matomo.git

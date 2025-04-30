@@ -1,7 +1,7 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://chopprr.cc/'
 languageCode = 'en-us'
 title = 'Linux Server Maintenance'
-theme = 'lugo'
+theme = ['lugo', 'matomo']
 
 # Theme used
 [module]
@@ -31,3 +31,9 @@ sectionPagesMenu = 'main'
   nextprev = true
   taglist = true
   showrss = true
+
+# Matomo (analytics) configuration
+[params.matomo]
+  url = "https://analytics.chopprr.cc/"
+  disableSRI = true
+  id = 1
