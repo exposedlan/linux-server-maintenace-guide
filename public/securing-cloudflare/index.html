@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<title>Securing Cloudflare | Linux Server Maintenance</title>
+	<link rel="canonical" href="http://localhost:1313/">
+	<link rel='alternate' type='application/rss+xml' title="Linux Server Maintenance RSS" href='/index.xml'>
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+	<link rel="icon" href="/favicon.ico">
+	<meta name="description" content="
+If you&rsquo;re using Cloudflare as your domain registrar, there&rsquo;s a lot of tools you can use to prevent malicious requests, bots, crawlers and script kiddies.
+Exclude requests not from your country
+
+First of all, if you&rsquo;re using your domain just to expose some apps to the internet, like Jellyfin or Immich for your friends or family, it is likely that the only legitimate requests made to your domain comes only comes from the country you live in. Requests from other countries are probably unwanted, unless you&rsquo;re using a VPN.">
+	<meta name="keywords" content="Security, Networking">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+</head>
+<body>
+<nav>
+    <ul>
+        <a href="/"><span class=menuname>◀️ Back to Home</span></a><br><br>
+        <a href="/about"><span class=menuname>🔬 About</span></a>
+    </ul>
+</nav>
+<main>
+<header><h1 id="tag_Securing Cloudflare">Securing Cloudflare</h1></header>
+<article>
+
+<hr>
+<p>If you&rsquo;re using Cloudflare as your domain registrar, there&rsquo;s a lot of tools you can use to prevent malicious requests, bots, crawlers and script kiddies.</p>
+<h1 id="exclude-requests-not-from-your-country">Exclude requests not from your country</h1>
+<hr>
+<p>First of all, if you&rsquo;re using your domain just to expose some apps to the internet, like <em><strong>Jellyfin</strong></em> or <em><strong>Immich</strong></em> for your friends or family, it is likely that the only legitimate requests made to your domain comes only comes from the country you live in. Requests from other countries are probably unwanted, unless you&rsquo;re using a VPN.</p>
+<p>To filter these out, go to your <a href="https://dash.cloudflare.com">Cloudflare dashboard</a> and select your <strong>domain</strong>. In the sidebar, select <strong>Security</strong> &gt; <strong>WAF</strong> and <strong>Create rule</strong><br></p>
+<p>Give it a name, then select:</p>
+<p><strong>Field</strong>: Country<br>
+<strong>Operator</strong>: does not equal<br>
+<strong>Value</strong>: Your country<br>
+<strong>Choose action</strong>: block<br>
+<strong>Place at</strong>: First<br>
+<br>
+Expression Preview should look like: <pre><code class="conf">(ip.geoip.country ne &ldquo;&lt;your country code&gt;&rdquo;)</code></pre>
+<br></p>
+<p><img src="/img/cf-waf-ipblock.webp" alt="WAF Rule"></p>
+<p>Save the WAF rule and voilà! Any requests that does not come from an IP from the same country as yours will be automatically blocked.</p>
+<blockquote>
+<p>⚠️ If you&rsquo;re using VPNs you could be blocked from accessing your domain.</p></blockquote>
+<h1 id="block-malicious-requests">Block malicious requests</h1>
+<hr>
+<p>We can also block url containing certain words like <strong>gpg</strong>, <strong>curl</strong>, <strong>wget</strong>, <strong>&lt;script</strong>, <strong>&lt;?php</strong>, <strong>fopen</strong>, <strong>exec</strong>, etc.. These requests are probably malicious and <strong>made by scripts scanning the internet to find vulnerable websites.</strong><br></p>
+<p>To <strong>block these (probably) malicious requests</strong>, as before, go to your <a href="https://dash.cloudflare.com">Cloudflare dashboard</a> and select your <strong>domain</strong>. In the sidebar, select <strong>Security</strong> &gt; <strong>WAF</strong> and <strong>Create rule</strong>. Name it however you like.<br></p>
+<p>Next to <strong>Expression preview</strong>, click on <strong>Edit expression</strong>, then paste (<u>don&rsquo;t paste the &lsquo;<strong>#</strong>&rsquo;</u>):</p>
+<pre tabindex="0"><code>
+(lower(http.request.uri.query) contains &#34;script&#34;\) or
+(lower(http.request.uri.query) contains &#34;&lt;?php&#34;) or
+(lower(http.request.uri.query) contains &#34;function&#34;) or
+(lower(http.request.uri.query) contains &#34;delete &#34;) or
+(lower(http.request.uri.query) contains &#34;union &#34;) or
+(lower(http.request.uri.query) contains &#34;drop &#34;) or
+(lower(http.request.uri.query) contains &#34; 0x&#34;) or
+(lower(http.request.uri.query) contains &#34;select &#34;) or
+(lower(http.request.uri.query) contains &#34;alter &#34;) or
+(lower(http.request.uri.query) contains &#34;.asp&#34;) or
+(lower(http.request.uri.query) contains &#34;svg/onload&#34;) or
+(lower(http.request.uri.query) contains &#34;base64&#34;) or
+(lower(http.request.uri.query) contains &#34;fopen&#34;) or
+(lower(http.request.uri.query) contains &#34;eval(&#34;) or
+(lower(http.request.uri.query) contains &#34;magic_quotes&#34;) or
+(lower(http.request.uri.query) contains &#34;allow_url_include&#34;) or
+(lower(http.request.uri.query) contains &#34;exec(&#34;) or
+(lower(http.request.uri.query) contains &#34;curl&#34;) or
+(lower(http.request.uri.query) contains &#34;wget&#34;) or
+(lower(http.request.uri.query) contains &#34;gpg&#34;)
+</code></pre><p><strong>Choose action</strong>: block<br>
+<strong>Place at</strong>: Custom<br>
+<strong>Select which rule this will fire after:</strong> <em>&lt; choose the country rule you made earlier &gt;</em><br></p>
+<p><br><img src="/img/cf-waf-malicious-reqs.webp" alt="WAF Rule"><br></p>
+<h1 id="block-bots-using-built-in-cloudflare-tools">Block bots using built-in Cloudflare tools</h1>
+<hr>
+<p>In the sidebar, inside <strong>Security</strong> &gt; <strong>Bots</strong> you can enable several features to prevent bots and crawlers from accessing your website. I recommend enabling:</p>
+<p><strong>Bot Fight Mode</strong><br>
+<strong>Block AI Bots</strong><br>
+<strong>AI Labyrinth</strong><br></p>
+<p><br><img src="/img/cf-bots.webp" alt="Cloudflare&rsquo;s bot blocking features"><br></p>
+<h1 id="miscellaneous-security-settings">Miscellaneous security settings</h1>
+<hr>
+<p>In the sidebar, inside <strong>Security</strong> &gt; <strong>Settings</strong>, I recommend you to enable:</p>
+<p><strong>Browser Integrity Check</strong><br>
+<strong>Replace insecure JavaScript libraries</strong><br></p>
+<h1 id="statistics">Statistics</h1>
+<hr>
+<p>I&rsquo;m only using <strong>WAF rules</strong> and settings discussed here.
+Here&rsquo;s my Cloudflare report for the last 30 days :</p>
+<p><br><img src="/img/cf-threats-report.webp" alt="Cloudflare threats report"><br></p>
+<p>Majority of IPs that hit my domain are from <strong>Singapore</strong> which is nowhere near from where I live. In my use case, any request coming from a country other than the one I live in is probably malicious.</p>
+<p>Here&rsquo;s the most threats by country:<br>
+<br><img src="/img/cf-threats-countries.webp" alt="Cloudflare report on most threats classified by countries"></p>
+<hr>
+
+
+<div id="nextprev">
+<a href="/jellyfin-debian-testing/"><div id="prevart">Previous:<br>Install Jellyfin on Debian Testing without Docker</div></a>
+</div>
+<div style="clear:both" class=taglist>Article tags:<br><a id="tag_security" href="http://localhost:1313/tags/security">Security</a> &middot; <a id="tag_networking" href="http://localhost:1313/tags/networking">Networking</a></div>
+</article>
+</main>
+
+<footer>
+	<a href="http://localhost:1313/">http://localhost:1313/</a><br><br><a href="/index.xml"><img src="/rss.svg" style="max-height:1.5em" alt="RSS Feed" title="Subscribe via RSS for updates."></a>
+</footer>
+
+</body>
+</html>
