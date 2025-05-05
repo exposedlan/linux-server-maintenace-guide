@@ -15,7 +15,7 @@ You'll be wasting your time Hardening your server if your password is **1234** ð
 # Store your passwords
 ---
 
-If you want to use a password manager, **DON'T USE ANY CLOUD BASED SERVICES**: What's the point of having strong passwords <u>if you store them on anyone else's computer?</u> If you really want a remote password manager accessible from anywhere, I recommend **Vaultwarden** (which is a **Bitwarden** reimplementation)
+If you want to use a password manager, **DON'T USE ANY CLOUD BASED SERVICES**: What's the point of having strong passwords <u>if you store them on anyone else's computer?</u> If you really want a remote password manager accessible from anywhere, I recommend **Vaultwarden** (which is a **Bitwarden** reimplementation in **Rust**)
 
 IMO, something offline should be prefered, in this case, I recommend **KeePassXC**.
 

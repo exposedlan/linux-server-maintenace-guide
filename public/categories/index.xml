@@ -1,11 +1,284 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Linux Server Maintenance</title>
-    <link>http://localhost:1313/categories/</link>
-    <description>Recent content in Categories on Linux Server Maintenance</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
-  </channel>
+	<title>Linux Server Maintenance</title>
+	<link>http://localhost:1313/categories/</link>
+	<description>Recent content in Categories on Linux Server Maintenance</description>
+	<generator>Hugo -- gohugo.io</generator>
+	<language>en-us</language>
+    
+        <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+	
+	
+	<item>
+		<title>Securing Cloudflare</title>
+		<link>http://localhost:1313/securing-cloudflare/</link>
+		<pubDate>Mon, 05 May 2025 22:40:54 +0200</pubDate>
+		
+		<guid>http://localhost:1313/securing-cloudflare/</guid>
+		<description>&lt;hr&gt;
+&lt;hr&gt;
+</description>
+	</item>
+	
+	<item>
+		<title>Install Jellyfin on Debian Testing without Docker</title>
+		<link>http://localhost:1313/jellyfin-debian-testing/</link>
+		<pubDate>Wed, 26 Mar 2025 13:00:56 +0100</pubDate>
+		
+		<guid>http://localhost:1313/jellyfin-debian-testing/</guid>
+		<description>&lt;hr&gt;
+&lt;p&gt;I&amp;rsquo;m using Debian Testing in my Server (I know, I know..), if you&amp;rsquo;re using it like me, you&amp;rsquo;ll notice that you can&amp;rsquo;t install jellyfin using apt because it&amp;rsquo;s not supported and some dependencies are not met.&lt;/p&gt;
+&lt;p&gt;This is not an issue, we can install these manually.&lt;/p&gt;
+&lt;h1 id=&#34;installing-jellyfins-apt-repository&#34;&gt;Installing Jellyfin&amp;rsquo;s APT repository&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;First, download and install the GPG signing key of Jellyfin&amp;rsquo;s Team:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo mkdir -p /etc/apt/keyrings&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/jellyfin.gpg&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Then, create &lt;code&gt;/etc/apt/sources.list.d/jellyfin.sources&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Add:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code class=&#34;conf&#34;&gt;[DEFAULT]
+Types: deb
+URIs: https://repo.jellyfin.org/debian
+Suites: bookworm
+Components: main
+Architectures: amd64
+Signed-By: /etc/apt/keyrings/jellyfin.gpg
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️  Notice the &lt;strong&gt;&amp;ldquo;Suites&amp;rdquo;&lt;/strong&gt; line. We must use &lt;strong&gt;&amp;ldquo;bookworm&amp;rdquo;&lt;/strong&gt; instead of trixie (current debian testing). In the future change &lt;strong&gt;bookworm&lt;/strong&gt; to the latest supported Debian &lt;strong&gt;STABLE&lt;/strong&gt;. ⚠️&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Now you can do
+&lt;code&gt;sudo apt update&lt;/code&gt;
+There should be no issue.&lt;/p&gt;
+&lt;h1 id=&#34;installation&#34;&gt;Installation&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;If you try installing Jellyfin now, you&amp;rsquo;ll miss 3 dependencies:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;libvpx7&lt;/li&gt;
+&lt;li&gt;libx265&lt;/li&gt;
+&lt;li&gt;libllvm16&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Download them using &lt;strong&gt;wget&lt;/strong&gt;:
+&lt;code&gt;wget http://ftp.de.debian.org/debian/pool/main/libv/libvpx/libvpx7_1.12.0-1+deb12u3_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wget http://ftp.de.debian.org/debian/pool/main/x/x265/libx265-199_3.5-2+b1_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wget http://ftp.de.debian.org/debian/pool/main/l/llvm-toolchain-16/libllvm16_16.0.6-15~deb12u1_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️  These are direct links from early 2025, search &lt;a href=&#34;https://www.debian.org/distrib/packages#view&#34;&gt;debian.org/distrib/packages&lt;/a&gt; for updated packages. ⚠️&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;And install them using &lt;strong&gt;dpkg -i&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dpkg -i libvpx7_1.12.0-1+deb12u3_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dpkg -i libx265-199_3.5-2+b1_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dkpg -i libllvm16_16.0.6-15~deb12u1_amd64.deb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You should now be able to install &lt;strong&gt;Jellyfin&lt;/strong&gt; using:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt install jellyfin&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Which is a group, it installs &lt;strong&gt;jellyfin-ffmpeg7&lt;/strong&gt;, &lt;strong&gt;jellyfin-server&lt;/strong&gt; and &lt;strong&gt;jellyfin-web&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+</description>
+	</item>
+	
+	<item>
+		<title>About</title>
+		<link>http://localhost:1313/about/</link>
+		<pubDate>Tue, 25 Feb 2025 17:08:53 +0100</pubDate>
+		
+		<guid>http://localhost:1313/about/</guid>
+		<description>&lt;hr&gt;
+&lt;h1 id=&#34;hi&#34;&gt;Hi,&lt;/h1&gt;
+&lt;p&gt;i&amp;rsquo;m a French person passionate about technology, IT and computers in general.
+I love tinkering with servers, Linux in general, Rimworld, Team Fortress 2 and cats.&lt;br&gt;
+I personnaly own a Poweredge T320 &amp;amp; a custom built NAS&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;I don&amp;rsquo;t work in IT, i&amp;rsquo;m not a professional, I&amp;rsquo;m just a hobbyist tinkering with his own servers, so take everything here with a grain of salt. I&amp;rsquo;ll try to source my posts at best to let you do your own research.&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;After more of a decade using Windows, I finally switch completely to Linux 3 years ago after tinkering with server distros for more than 2 years. I was using a laptop with broken screen as my home server at the time, therefore, I learned a lot about CLI at this time.&lt;/p&gt;
+&lt;p&gt;I mostly familiar with &lt;strong&gt;Arch Linux&lt;/strong&gt;, &lt;strong&gt;Debian&lt;/strong&gt; (and &lt;strong&gt;DebianUnstable&lt;/strong&gt;) and &lt;strong&gt;Ubuntu Server&lt;/strong&gt; (like everyone else)&lt;br&gt;
+Honorable mention to &lt;strong&gt;Alpine Linux&lt;/strong&gt;. I love it, it&amp;rsquo;s a very good distribution, it&amp;rsquo;s lightweight and very suitable for VMs.&lt;/p&gt;
+&lt;h1 id=&#34;computers-details&#34;&gt;Computers Details&lt;/h1&gt;
+&lt;h3 id=&#34;main-desktop&#34;&gt;Main desktop&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Ryzen 5 3600&lt;/li&gt;
+&lt;li&gt;48gb DDR4 2666MHz&lt;/li&gt;
+&lt;li&gt;RTX 4060 (Main GPU)&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;GTX 1660 SUPER (to passthrough inside VMs)&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;1tb NVMe&lt;/li&gt;
+&lt;li&gt;1tb HDD&lt;/li&gt;
+&lt;li&gt;oh, and I use arch btw&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This setup don&amp;rsquo;t work anymore as I upgraded my main GPU. In a nutshell, i&amp;rsquo;m on AM4 socket, and it hasn&amp;rsquo;t enough PCIe lanes, so my GPUs would run at PCIe 2x (for the RTX) and 4x (IIRC, for the GTX1660). I can&amp;rsquo;t swap these because of &lt;strong&gt;iommu groups&lt;/strong&gt; requiring me to also pass my ethernet adapter. It&amp;rsquo;s easily resolvable by buying an Network Card, but I would not have enough PCIe ports and I don&amp;rsquo;t want to use my 4060 at 2x.&lt;br&gt;
+I guess I&amp;rsquo;ll go back to MacOS for my music production needs :)&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Why passing a GPU to a VM ? mostly because I do music stuffs, and I don&amp;rsquo;t like Linux DAWs at all &lt;sub&gt;&lt;sup&gt;and I already had an FL Studio licence :)&lt;br&gt;
+&lt;strong&gt;(support developers if you love their products, especially if they offer lifetime update when every others don&amp;rsquo;t ;)&lt;/strong&gt; &lt;br&gt;&lt;br&gt;&lt;/sub&gt;&lt;/sup&gt;
+And because it&amp;rsquo;s very nice to have smooth VMs, I started using more with GPU, some to record videos, others to browse / use certains apps with VPNs (I find it easier to do &amp;ldquo;split-tunneling&amp;rdquo; that way instead of tinkering with &lt;strong&gt;iptables&lt;/strong&gt;)&lt;/p&gt;
+&lt;h3 id=&#34;macbook---m1-pro&#34;&gt;Macbook - M1 Pro&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;16gb RAM&lt;/li&gt;
+&lt;li&gt;500gb SSD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I use it when I travel (almost never) and to test apps &amp;amp; stuff.&lt;br&gt;
+Before I bought a 2nd GPU, it was my main music production device.&lt;/p&gt;
+&lt;h1 id=&#34;servers-details&#34;&gt;Servers details:&lt;/h1&gt;
+&lt;h3 id=&#34;poweredge-t320&#34;&gt;Poweredge T320&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel Xeon E5-2420 v2 @ 2.20GHz&lt;/li&gt;
+&lt;li&gt;32GB DDR3&lt;/li&gt;
+&lt;li&gt;4 x 3tb SAS HDD &lt;em&gt;(7k rpm)&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;for data and backups, and I also seed Linux ISOs. Having OS, Docker and programs on a different HDD pool allows faster I/O performance for both the system and the file operations.&lt;/li&gt;
+&lt;li&gt;RAID 5, approximately 9tb avail.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;2 x 300gb SAS HDD &lt;em&gt;(15k rpm)&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;mainly for OS &amp;amp; programs, I watched some performance tests, IIRC two 15k HDD are not much slower compared to SATA SSDs&lt;/li&gt;
+&lt;li&gt;RAID 0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is my main server. I use it for backups, torrents, NAS, Docker&amp;hellip; therefore it handles my 20+ container very well and it almost never reach half of CPU usage.&lt;br&gt;&lt;br&gt;
+One reason I switched my apps from my NAS to this box is the price of SAS disks compared to SATA, for the price of 12tb of capacity (SAS, used), I could only buy 6tb of capacity (SATA, also used)&lt;br&gt;
+Anyways, I am very happy about it, yet it draws quite a bit of energy&lt;/p&gt;
+&lt;h3 id=&#34;custom-nas&#34;&gt;Custom NAS&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now that I have a new GPU, I plan to using the GTX 1660 within the T320 and definitely shut down this crap.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel Core i7 6700&lt;/li&gt;
+&lt;li&gt;16gb DDR4 &lt;em&gt;(It previously had 32 but two sticks died)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;2 x (2 x 1tb SATA HDD) including one that is dead
+&lt;ul&gt;
+&lt;li&gt;That was my first NAS, awful at every level. Main pool is degraded, the case is the cheapest on Amazon, so disks are lying inside on top of each others, one pool (SSD) contains just one disk and the remaining of the RAM is dying. Oh, and every part was bought used so two motherboards died until now :)&lt;/li&gt;
+&lt;li&gt;two RAID 1 pools (~ 2tb avail.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;1 SDD - 500gb
+&lt;ul&gt;
+&lt;li&gt;It was mainly used for apps, now it&amp;rsquo;s used as a fast network share as I don&amp;rsquo;t have any other SSD on any of my other servers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;del&gt;The only reason I still don&amp;rsquo;t disconnect this monstruosity is Plex. I have no other GPU or CPU to replace the Core i7 for video transcoding. I think I will tranform it to a genuine Plex Box when I have enough money to buy at least two pair of HDD and a proper case.&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;As explained above, I plan to definitely shut down this NAS, I&amp;rsquo;ll reuse both SSDs used in it and I&amp;rsquo;ll probably trash HDD lying inside. I bought them used more than 3 years ago, and 1tb drive is very little space considering SATA ports are not unlimited.&lt;/p&gt;
+&lt;hr&gt;
+</description>
+	</item>
+	
+	<item>
+		<title>Basics and Fundamentals</title>
+		<link>http://localhost:1313/basics-and-fundamentals/</link>
+		<pubDate>Tue, 25 Feb 2025 15:55:52 +0100</pubDate>
+		
+		<guid>http://localhost:1313/basics-and-fundamentals/</guid>
+		<description>&lt;hr&gt;
+&lt;p&gt;The weakest part is always the person behind the computer. This page will ensure you have good security practices before doing any hardening.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ll be wasting your time Hardening your server if your password is &lt;strong&gt;1234&lt;/strong&gt; 😉&lt;/p&gt;
+&lt;br&gt;
+&lt;h1 id=&#34;store-your-passwords&#34;&gt;Store your passwords&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;If you want to use a password manager, &lt;strong&gt;DON&amp;rsquo;T USE ANY CLOUD BASED SERVICES&lt;/strong&gt;: What&amp;rsquo;s the point of having strong passwords &lt;u&gt;if you store them on anyone else&amp;rsquo;s computer?&lt;/u&gt; If you really want a remote password manager accessible from anywhere, I recommend &lt;strong&gt;Vaultwarden&lt;/strong&gt; (which is a &lt;strong&gt;Bitwarden&lt;/strong&gt; reimplementation)&lt;/p&gt;
+&lt;p&gt;IMO, something offline should be prefered, in this case, I recommend &lt;strong&gt;KeePassXC&lt;/strong&gt;.&lt;/p&gt;
+&lt;br&gt;
+&lt;h1 id=&#34;keep-your-system-up-to-date&#34;&gt;Keep your system up-to-date&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;When upgrading your system bugs will be fixed and vulnerabilities will be patched. For a good security you should keep your systems updated.&lt;/p&gt;
+&lt;p&gt;For &lt;strong&gt;Debian or derivatives (Ubuntu, etc..)&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt update &amp;amp;&amp;amp; sudo apt dist-upgrade&lt;/code&gt;&lt;br&gt;
+&lt;em&gt;&amp;lsquo;dist-upgrade&amp;rsquo; allows installation of new packages when upgrading in opposite to &amp;lsquo;upgrade&amp;rsquo; which is not able to add or remove new packages. It is useful when upgraded packages gets new dependencies.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;For &lt;strong&gt;OpenSUSE&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo zypper refresh &amp;amp;&amp;amp; sudo zypper update&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;For &lt;strong&gt;Fedora, AlmaLinux, RHEL distros, etc..&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dnf upgrade --refresh&lt;/code&gt;&lt;br&gt;
+⚠️ &lt;em&gt;don&amp;rsquo;t forget to reboot! as stated in the &lt;a href=&#34;https://docs.fedoraproject.org/en-US/quick-docs/upgrading-fedora-offline/#sect-performing-system-upgrade&#34;&gt;official documentation&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;For &lt;strong&gt;Alpine Linux&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apk update &amp;amp;&amp;amp; sudo apk upgrade&lt;/code&gt;&lt;/p&gt;
+&lt;br&gt;
+&lt;h1 id=&#34;disable-root-user-account&#34;&gt;Disable root user-account&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;You don&amp;rsquo;t want to use the &lt;em&gt;root&lt;/em&gt; user account directly, use &lt;strong&gt;sudo&lt;/strong&gt; or &lt;strong&gt;doas&lt;/strong&gt; instead. &lt;strong&gt;Sudo&lt;/strong&gt; should be installed on most distribution, therefore if not, install it and execute: &lt;code&gt;sudo usermod -aG sudo &amp;lt;user&amp;gt;&lt;/code&gt; This will add your user account to the &lt;strong&gt;sudo group&lt;/strong&gt;, which allow you to use &lt;strong&gt;sudo&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To disable root account without loosing root access through &lt;em&gt;sudo&lt;/em&gt;, use: &lt;code&gt;passwd --lock root&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+</description>
+	</item>
+	
+	<item>
+		<title>Hardening SSH</title>
+		<link>http://localhost:1313/hardening_ssh/</link>
+		<pubDate>Tue, 25 Feb 2025 00:06:32 +0100</pubDate>
+		
+		<guid>http://localhost:1313/hardening_ssh/</guid>
+		<description>&lt;hr&gt;
+&lt;p&gt;First thing we want is to do is &lt;strong&gt;disable root login&lt;/strong&gt; on your machine. Before proceeding, create a new user with the command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;useradd -m &amp;lt;user&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;then create a &lt;strong&gt;STRONG&lt;/strong&gt; password for it. You don&amp;rsquo;t wan&amp;rsquo;t someone to guess your password. I recommend a randomly generated password + a password manager to store it.&lt;/p&gt;
+&lt;p&gt;Next, we want to &lt;strong&gt;disable password authentication&lt;/strong&gt;, we will authenticate using an &lt;strong&gt;SSH Key&lt;/strong&gt;. This means that only computers with approved SSH keys will be able to connect.&lt;/p&gt;
+&lt;p&gt;To approve our key, we first need to create one.&lt;/p&gt;
+&lt;br&gt;
+&lt;h1 id=&#34;generate-ssh-keys&#34;&gt;Generate SSH Keys&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;If you have a file called &lt;strong&gt;&lt;em&gt;&amp;lt;something&amp;gt;&lt;/em&gt;.pub&lt;/strong&gt; in your &lt;strong&gt;/home/&amp;lt;user&amp;gt;/.ssh&lt;/strong&gt; folder, you can skip this section.&lt;/p&gt;
+&lt;p&gt;This section does not concern your server, everything explained here should be made on client computers, which means &lt;strong&gt;computers that WILL BE authorized to connect to your server.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/ssh-key-based-authentication.png&#34; alt=&#34;info card to explain how ssh key works.&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s generate an key pair using the command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh-keygen&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note that if you created a passphrase, you&amp;rsquo;ll need to enter it at each connection.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;After answering a few questions, you should have these files in your &lt;strong&gt;/home/&amp;lt;user&amp;gt;/.ssh&lt;/strong&gt; folder:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/ssh-folder.png&#34; alt=&#34;.ssh folder&#34;&gt;&lt;/p&gt;
+&lt;br&gt;
+&lt;h1 id=&#34;copy-ssh-keys&#34;&gt;Copy SSH Keys&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;In the above screenshot, notice the file &lt;strong&gt;authorized_keys&lt;/strong&gt;. &lt;strong&gt;Inside your server&lt;/strong&gt;, this is where your client&amp;rsquo;s key will reside.&lt;/p&gt;
+&lt;p&gt;Now that we have our key, still in the &lt;strong&gt;.ssh&lt;/strong&gt; folder, you need to copy the content of &lt;strong&gt;&amp;lt;something&amp;gt;.pub&lt;/strong&gt; &lt;em&gt;(in my case &lt;strong&gt;id_rsa.pub&lt;/strong&gt;)&lt;/em&gt; into the file &lt;strong&gt;/home/&amp;lt;user&amp;gt;/.ssh/authorized_keys&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The most easy way to copy your SSH Key into your server&amp;rsquo;s &lt;strong&gt;authorized_keys&lt;/strong&gt; file is to use the &lt;strong&gt;ssh-copy-id&lt;/strong&gt; command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh-copy-id &amp;lt;user&amp;gt;@&amp;lt;hostname&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now try to connect to your server using SSH, &lt;strong&gt;now it should not ask for password to log-in.&lt;/strong&gt;&lt;/p&gt;
+&lt;br&gt;
+&lt;h1 id=&#34;edit-ssh-server-configuration&#34;&gt;Edit SSH Server configuration&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;Now let&amp;rsquo;s dive into the meat and potatoes. We will now disable password authentication.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️ Please be sure to properly set your keys in your server because once password auth is disabled, you could be locked outside. ⚠️&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;We will edit the configuration file located at &lt;strong&gt;/etc/ssh/sshd_config&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Optional&lt;/li&gt;
+&lt;li&gt;Uncomment &amp;amp; change &lt;em&gt;&lt;strong&gt;PermitRootLogin yes&lt;/strong&gt;&lt;/em&gt; to &lt;em&gt;&lt;strong&gt;PermitRootLogin no&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Optional, but you can uncomment &lt;em&gt;&lt;strong&gt;AllowUsers&lt;/strong&gt;&lt;/em&gt; and add specific users which will be the only ones authorized to connect.&lt;/li&gt;
+&lt;li&gt;Verify that the &lt;em&gt;&lt;strong&gt;AuthorizedKeysFile&lt;/strong&gt;&lt;/em&gt; line points to &lt;em&gt;&lt;strong&gt;.ssh/authorized_keys&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Uncomment &amp;amp; change &lt;em&gt;&lt;strong&gt;PasswordAuthentication yes&lt;/strong&gt;&lt;/em&gt; to &lt;em&gt;&lt;strong&gt;PasswordAuthentication no&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Verify that the &lt;em&gt;&lt;strong&gt;AuthenticationMethods&lt;/strong&gt;&lt;/em&gt; line points to &lt;em&gt;&lt;strong&gt;publickey&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Save the file, and restart &lt;strong&gt;sshd&lt;/strong&gt; with:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl reload sshd &amp;amp;&amp;amp; sudo systemctl restart sshd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To verify that password auth has been disabled, we will try to connect to the server using this command which force password authentication:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &amp;lt;user&amp;gt;@&amp;lt;hostname&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;It should return &lt;strong&gt;permission denied (publickey)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/ssh-pw-access-denied.png&#34; alt=&#34;ssh permission denied error&#34;&gt;&lt;/p&gt;
+&lt;br&gt;
+&lt;h1 id=&#34;ban-brute-forcing-ips&#34;&gt;Ban brute-forcing IPs&lt;/h1&gt;
+&lt;p&gt;&lt;sub&gt;&lt;sup&gt;source: &lt;a href=&#34;https://wiki.archlinux.org/title/Fail2ban&#34;&gt;Arch Wiki - Fail2ban&lt;/a&gt;&lt;/sub&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s well known that scripts which scans the entire internet trying to connect randomly to SSH servers exists. The second you open your SSH server to the  Internet, you&amp;rsquo;ll be spammed with bots trying to connect to your machine. To mitigate that, we can install a tool called &lt;strong&gt;fail2ban&lt;/strong&gt;. &lt;a href=&#34;https://github.com/fail2ban/fail2ban&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After installing, start and enable its service:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl enable --now fail2ban.service&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now create a &lt;strong&gt;/etc/fail2ban/jail.local&lt;/strong&gt; file. Alternatively, you can create separate configuration files inside &lt;strong&gt;/etc/fail2ban/jail.d/&lt;/strong&gt; folder.&lt;/p&gt;
+&lt;p&gt;Populate it with:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code class=&#34;conf&#34;&gt;[DEFAULT]
+bantime = 1d               # Ban time
+destemail = yourname@example.com
+sender = yourname@example.com
+
+# to ban &amp; send an e-mail with whois report to the destemail.
+action = %(action_mw)s
+
+# same as action_mw but also send relevant log lines
+#action = %(action_mwl)s
+
+[sshd]                            # Enable Jail for SSH server
+enabled = true
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;When you&amp;rsquo;re done editing configuration files, you need to reload &lt;strong&gt;fail2ban&lt;/strong&gt; using:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl reload fail2ban.service&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;well-done-your-ssh-server-is-now-secured&#34;&gt;Well done! Your SSH server is now secured!&lt;/h2&gt;
+</description>
+	</item>
+	
+	</channel>
 </rss>
