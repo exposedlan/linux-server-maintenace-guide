@@ -1,8 +1,7 @@
 baseURL = 'https://chopprr.cc/'
 languageCode = 'en-us'
 title = 'Linux Server Maintenance'
-theme = ['lugo', 'matomo']
-disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
+theme = ['lugo']
 
 # Theme used
 [module]
@@ -38,8 +37,3 @@ sectionPagesMenu = 'main'
   taglist = true
   showrss = true
 
-# Matomo (analytics) configuration
-[params.matomo]
-  url = "https://analytics.chopprr.cc/"
-  disableSRI = true
-  id = 1
