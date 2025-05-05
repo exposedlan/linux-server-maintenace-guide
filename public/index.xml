@@ -1,156 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-	<title>Linux Server Maintenance</title>
-	<link>/</link>
-	<description>Recent content in Linux Server Maintenance Guide on Linux Server Maintenance</description>
-	<generator>Hugo -- gohugo.io</generator>
-	<language>en-us</language>
-	<lastBuildDate>Mon, 24 Feb 2025 23:49:32 +0100</lastBuildDate>
-    
-        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-	
-	
-	<item>
-		<title>Privacy</title>
-		<link>/privacy/</link>
-		<pubDate>Wed, 30 Apr 2025 17:45:52 +0200</pubDate>
-		
-		<guid>/privacy/</guid>
-		<description>&lt;hr&gt;
-&lt;p&gt;Matomo is used to collect anonymous statistics about this website.&lt;/p&gt;
-&lt;div class=&#34;MatomoOptout&#34;&gt;
-&lt;script data-id=&#34;promise-polyfill&#34; data-promise-polyfill-url=&#34;/js/es6-promise.auto.min.f2a14fbc03102e3f6139790da043b488e5d0c76b47c80f175a4ca6e4edddc6a3.js&#34; src=&#34;/js/promise-polyfill.min.159647c35ccb9da71d294095829881a9bbd38cc07f0fbf5df5c09e844cc3082d.js&#34;  defer&gt;&lt;/script&gt;
-&lt;script data-id=&#34;matomo-optout&#34; data-matomo-optout-url=&#34;https://analytics.chopprr.cc/&#34; src=&#34;/js/matomo-optout.min.cd5084cd4c4e1870d2fb02d9b00ad5a3e0f8806b9285a967db4dd87550f4dcf7.js&#34;  defer&gt;&lt;/script&gt;
-&lt;link rel=&#34;stylesheet&#34; href=&#34;/css/matomo-optout.min.ee15759251f0fa101c0ed9142a4e9c39ef5e093ca4d675ba05edd450ee9c0c7d.css&#34; &gt;
-&lt;div class=&#34;MatomoOptout-message MatomoOptout-message--track is-hidden&#34;&gt;You are being watched.&lt;/div&gt;
-&lt;div class=&#34;MatomoOptout-message MatomoOptout-message--block&#34;&gt;You are not tracked.&lt;/div&gt;
-&lt;button class=&#34;MatomoOptout-button MatomoOptout-button--track&#34;&gt;Allow tracking&lt;/button&gt; 
-&lt;button class=&#34;MatomoOptout-button MatomoOptout-button--block&#34;&gt;Disable tracking&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;hr&gt;
-</description>
-	</item>
-	
-	<item>
-		<title>Basics and Fundamentals</title>
-		<link>/basics-and-fundamentals/</link>
-		<pubDate>Tue, 25 Feb 2025 15:55:52 +0100</pubDate>
-		
-		<guid>/basics-and-fundamentals/</guid>
-		<description>&lt;hr&gt;
-&lt;p&gt;The weakest part is always the person behind the computer. This page will ensure you have good security practices before doing any hardening.&lt;/p&gt;
-&lt;p&gt;You&amp;rsquo;ll be wasting your time Hardening your server if your password is &lt;strong&gt;1234&lt;/strong&gt; 😉&lt;/p&gt;
-&lt;br&gt;
-&lt;h1 id=&#34;store-your-passwords&#34;&gt;Store your passwords&lt;/h1&gt;
-&lt;hr&gt;
-&lt;p&gt;If you want to use a password manager, &lt;strong&gt;DON&amp;rsquo;T USE ANY CLOUD BASED SERVICES&lt;/strong&gt;: What&amp;rsquo;s the point of having strong passwords &lt;u&gt;if you store them on anyone else&amp;rsquo;s computer?&lt;/u&gt; If you really want a remote password manager accessible from anywhere, I recommend &lt;strong&gt;Vaultwarden&lt;/strong&gt; (which is a &lt;strong&gt;Bitwarden&lt;/strong&gt; reimplementation)&lt;/p&gt;
-&lt;p&gt;IMO, something offline should be prefered, in this case, I recommend &lt;strong&gt;KeePassXC&lt;/strong&gt;.&lt;/p&gt;
-&lt;br&gt;
-&lt;h1 id=&#34;keep-your-system-up-to-date&#34;&gt;Keep your system up-to-date&lt;/h1&gt;
-&lt;hr&gt;
-&lt;p&gt;When upgrading your system bugs will be fixed and vulnerabilities will be patched. For a good security you should keep your systems updated.&lt;/p&gt;
-&lt;p&gt;For &lt;strong&gt;Debian or derivatives (Ubuntu, etc..)&lt;/strong&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sudo apt update &amp;amp;&amp;amp; sudo apt dist-upgrade&lt;/code&gt;&lt;br&gt;
-&lt;em&gt;&amp;lsquo;dist-upgrade&amp;rsquo; allows installation of new packages when upgrading in opposite to &amp;lsquo;upgrade&amp;rsquo; which is not able to add or remove new packages. It is useful when upgraded packages gets new dependencies.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;For &lt;strong&gt;OpenSUSE&lt;/strong&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sudo zypper refresh &amp;amp;&amp;amp; sudo zypper update&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;For &lt;strong&gt;Fedora, AlmaLinux, RHEL distros, etc..&lt;/strong&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sudo dnf upgrade --refresh&lt;/code&gt;&lt;br&gt;
-⚠️ &lt;em&gt;don&amp;rsquo;t forget to reboot! as stated in the &lt;a href=&#34;https://docs.fedoraproject.org/en-US/quick-docs/upgrading-fedora-offline/#sect-performing-system-upgrade&#34;&gt;official documentation&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;For &lt;strong&gt;Alpine Linux&lt;/strong&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sudo apk update &amp;amp;&amp;amp; sudo apk upgrade&lt;/code&gt;&lt;/p&gt;
-&lt;br&gt;
-&lt;h1 id=&#34;disable-root-user-account&#34;&gt;Disable root user-account&lt;/h1&gt;
-&lt;hr&gt;
-&lt;p&gt;You don&amp;rsquo;t want to use the &lt;em&gt;root&lt;/em&gt; user account directly, use &lt;strong&gt;sudo&lt;/strong&gt; or &lt;strong&gt;doas&lt;/strong&gt; instead. &lt;strong&gt;Sudo&lt;/strong&gt; should be installed on most distribution, therefore if not, install it and execute: &lt;code&gt;sudo usermod -aG sudo &amp;lt;user&amp;gt;&lt;/code&gt; This will add your user account to the &lt;strong&gt;sudo group&lt;/strong&gt;, which allow you to use &lt;strong&gt;sudo&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;To disable root account without loosing root access through &lt;em&gt;sudo&lt;/em&gt;, use: &lt;code&gt;passwd --lock root&lt;/code&gt;&lt;/p&gt;
-&lt;hr&gt;
-</description>
-	</item>
-	
-	<item>
-		<title>Hardening SSH</title>
-		<link>/hardening_ssh/</link>
-		<pubDate>Tue, 25 Feb 2025 00:06:32 +0100</pubDate>
-		
-		<guid>/hardening_ssh/</guid>
-		<description>&lt;hr&gt;
-&lt;p&gt;First thing we want is to do is &lt;strong&gt;disable root login&lt;/strong&gt; on your machine. Before proceeding, create a new user with the command:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;useradd -m &amp;lt;user&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;then create a &lt;strong&gt;STRONG&lt;/strong&gt; password for it. You don&amp;rsquo;t wan&amp;rsquo;t someone to guess your password. I recommend a randomly generated password + a password manager to store it.&lt;/p&gt;
-&lt;p&gt;Next, we want to &lt;strong&gt;disable password authentication&lt;/strong&gt;, we will authenticate using an &lt;strong&gt;SSH Key&lt;/strong&gt;. This means that only computers with approved SSH keys will be able to connect.&lt;/p&gt;
-&lt;p&gt;To approve our key, we first need to create one.&lt;/p&gt;
-&lt;br&gt;
-&lt;h1 id=&#34;generate-ssh-keys&#34;&gt;Generate SSH Keys&lt;/h1&gt;
-&lt;hr&gt;
-&lt;p&gt;If you have a file called &lt;strong&gt;&lt;em&gt;&amp;lt;something&amp;gt;&lt;/em&gt;.pub&lt;/strong&gt; in your &lt;strong&gt;/home/&amp;lt;user&amp;gt;/.ssh&lt;/strong&gt; folder, you can skip this section.&lt;/p&gt;
-&lt;p&gt;This section does not concern your server, everything explained here should be made on client computers, which means &lt;strong&gt;computers that WILL BE authorized to connect to your server.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ssh-key-based-authentication.png&#34; alt=&#34;info card to explain how ssh key works.&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Let&amp;rsquo;s generate an key pair using the command:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ssh-keygen&lt;/code&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note that if you created a passphrase, you&amp;rsquo;ll need to enter it at each connection.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;After answering a few questions, you should have these files in your &lt;strong&gt;/home/&amp;lt;user&amp;gt;/.ssh&lt;/strong&gt; folder:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ssh-folder.png&#34; alt=&#34;.ssh folder&#34;&gt;&lt;/p&gt;
-&lt;br&gt;
-&lt;h1 id=&#34;copy-ssh-keys&#34;&gt;Copy SSH Keys&lt;/h1&gt;
-&lt;hr&gt;
-&lt;p&gt;In the above screenshot, notice the file &lt;strong&gt;authorized_keys&lt;/strong&gt;. &lt;strong&gt;Inside your server&lt;/strong&gt;, this is where your client&amp;rsquo;s key will reside.&lt;/p&gt;
-&lt;p&gt;Now that we have our key, still in the &lt;strong&gt;.ssh&lt;/strong&gt; folder, you need to copy the content of &lt;strong&gt;&amp;lt;something&amp;gt;.pub&lt;/strong&gt; &lt;em&gt;(in my case &lt;strong&gt;id_rsa.pub&lt;/strong&gt;)&lt;/em&gt; into the file &lt;strong&gt;/home/&amp;lt;user&amp;gt;/.ssh/authorized_keys&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The most easy way to copy your SSH Key into your server&amp;rsquo;s &lt;strong&gt;authorized_keys&lt;/strong&gt; file is to use the &lt;strong&gt;ssh-copy-id&lt;/strong&gt; command:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ssh-copy-id &amp;lt;user&amp;gt;@&amp;lt;hostname&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Now try to connect to your server using SSH, &lt;strong&gt;now it should not ask for password to log-in.&lt;/strong&gt;&lt;/p&gt;
-&lt;br&gt;
-&lt;h1 id=&#34;edit-ssh-server-configuration&#34;&gt;Edit SSH Server configuration&lt;/h1&gt;
-&lt;hr&gt;
-&lt;p&gt;Now let&amp;rsquo;s dive into the meat and potatoes. We will now disable password authentication.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;⚠️ Please be sure to properly set your keys in your server because once password auth is disabled, you could be locked outside. ⚠️&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;We will edit the configuration file located at &lt;strong&gt;/etc/ssh/sshd_config&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Optional&lt;/li&gt;
-&lt;li&gt;Uncomment &amp;amp; change &lt;em&gt;&lt;strong&gt;PermitRootLogin yes&lt;/strong&gt;&lt;/em&gt; to &lt;em&gt;&lt;strong&gt;PermitRootLogin no&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;Optional, but you can uncomment &lt;em&gt;&lt;strong&gt;AllowUsers&lt;/strong&gt;&lt;/em&gt; and add specific users which will be the only ones authorized to connect.&lt;/li&gt;
-&lt;li&gt;Verify that the &lt;em&gt;&lt;strong&gt;AuthorizedKeysFile&lt;/strong&gt;&lt;/em&gt; line points to &lt;em&gt;&lt;strong&gt;.ssh/authorized_keys&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;Uncomment &amp;amp; change &lt;em&gt;&lt;strong&gt;PasswordAuthentication yes&lt;/strong&gt;&lt;/em&gt; to &lt;em&gt;&lt;strong&gt;PasswordAuthentication no&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;Verify that the &lt;em&gt;&lt;strong&gt;AuthenticationMethods&lt;/strong&gt;&lt;/em&gt; line points to &lt;em&gt;&lt;strong&gt;publickey&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Save the file, and restart &lt;strong&gt;sshd&lt;/strong&gt; with:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sudo systemctl reload sshd &amp;amp;&amp;amp; sudo systemctl restart sshd&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;To verify that password auth has been disabled, we will try to connect to the server using this command which force password authentication:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes &amp;lt;user&amp;gt;@&amp;lt;hostname&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;It should return &lt;strong&gt;permission denied (publickey)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/ssh-pw-access-denied.png&#34; alt=&#34;ssh permission denied error&#34;&gt;&lt;/p&gt;
-&lt;br&gt;
-&lt;h1 id=&#34;ban-brute-forcing-ips&#34;&gt;Ban brute-forcing IPs&lt;/h1&gt;
-&lt;p&gt;&lt;sub&gt;&lt;sup&gt;source: &lt;a href=&#34;https://wiki.archlinux.org/title/Fail2ban&#34;&gt;Arch Wiki - Fail2ban&lt;/a&gt;&lt;/sub&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;p&gt;It&amp;rsquo;s well known that scripts which scans the entire internet trying to connect randomly to SSH servers exists. The second you open your SSH server to the  Internet, you&amp;rsquo;ll be spammed with bots trying to connect to your machine. To mitigate that, we can install a tool called &lt;strong&gt;fail2ban&lt;/strong&gt;. &lt;a href=&#34;https://github.com/fail2ban/fail2ban&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;After installing, start and enable its service:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sudo systemctl enable --now fail2ban.service&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Now create a &lt;strong&gt;/etc/fail2ban/jail.local&lt;/strong&gt; file. Alternatively, you can create separate configuration files inside &lt;strong&gt;/etc/fail2ban/jail.d/&lt;/strong&gt; folder.&lt;/p&gt;
-&lt;p&gt;Populate it with:&lt;/p&gt;
-&lt;pre&gt;
-&lt;code class=&#34;conf&#34;&gt;[DEFAULT]
-bantime = 1d               # Ban time
-destemail = yourname@example.com
-sender = yourname@example.com
-
-# to ban &amp; send an e-mail with whois report to the destemail.
-action = %(action_mw)s
-
-# same as action_mw but also send relevant log lines
-#action = %(action_mwl)s
-
-[sshd]                            # Enable Jail for SSH server
-enabled = true
-&lt;/code&gt;
-&lt;/pre&gt;
-&lt;p&gt;When you&amp;rsquo;re done editing configuration files, you need to reload &lt;strong&gt;fail2ban&lt;/strong&gt; using:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sudo systemctl reload fail2ban.service&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&#34;well-done-your-ssh-server-is-now-secured&#34;&gt;Well done! Your SSH server is now secured!&lt;/h2&gt;
-</description>
-	</item>
-	
-	</channel>
+    <title>Linux Server Maintenance Guide on Linux Server Maintenance</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Linux Server Maintenance Guide on Linux Server Maintenance</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 May 2025 22:40:54 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Securing Cloudflare</title>
+      <link>http://localhost:1313/securing-cloudflare/</link>
+      <pubDate>Mon, 05 May 2025 22:40:54 +0200</pubDate>
+      <guid>http://localhost:1313/securing-cloudflare/</guid>
+      <description>&lt;hr&gt;&#xA;&lt;hr&gt;</description>
+    </item>
+    <item>
+      <title>Install Jellyfin on Debian Testing without Docker</title>
+      <link>http://localhost:1313/jellyfin-debian-testing/</link>
+      <pubDate>Wed, 26 Mar 2025 13:00:56 +0100</pubDate>
+      <guid>http://localhost:1313/jellyfin-debian-testing/</guid>
+      <description>&lt;hr&gt;&#xA;&lt;p&gt;I&amp;rsquo;m using Debian Testing in my Server (I know, I know..), if you&amp;rsquo;re using it like me, you&amp;rsquo;ll notice that you can&amp;rsquo;t install jellyfin using apt because it&amp;rsquo;s not supported and some dependencies are not met.&lt;/p&gt;&#xA;&lt;p&gt;This is not an issue, we can install these manually.&lt;/p&gt;&#xA;&lt;h1 id=&#34;installing-jellyfins-apt-repository&#34;&gt;Installing Jellyfin&amp;rsquo;s APT repository&lt;/h1&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;First, download and install the GPG signing key of Jellyfin&amp;rsquo;s Team:&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;sudo mkdir -p /etc/apt/keyrings&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/jellyfin.gpg&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Tue, 25 Feb 2025 17:08:53 +0100</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;hr&gt;&#xA;&lt;h1 id=&#34;hi&#34;&gt;Hi,&lt;/h1&gt;&#xA;&lt;p&gt;i&amp;rsquo;m a French person passionate about technology, IT and computers in general.&#xA;I love tinkering with servers, Linux in general, Rimworld, Team Fortress 2 and cats.&lt;br&gt;&#xA;I personnaly own a Poweredge T320 &amp;amp; a custom built NAS&lt;/p&gt;&#xA;&lt;p&gt;&lt;u&gt;I don&amp;rsquo;t work in IT, i&amp;rsquo;m not a professional, I&amp;rsquo;m just a hobbyist tinkering with his own servers, so take everything here with a grain of salt. I&amp;rsquo;ll try to source my posts at best to let you do your own research.&lt;/u&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Basics and Fundamentals</title>
+      <link>http://localhost:1313/basics-and-fundamentals/</link>
+      <pubDate>Tue, 25 Feb 2025 15:55:52 +0100</pubDate>
+      <guid>http://localhost:1313/basics-and-fundamentals/</guid>
+      <description>&lt;hr&gt;&#xA;&lt;p&gt;The weakest part is always the person behind the computer. This page will ensure you have good security practices before doing any hardening.&lt;/p&gt;&#xA;&lt;p&gt;You&amp;rsquo;ll be wasting your time Hardening your server if your password is &lt;strong&gt;1234&lt;/strong&gt; 😉&lt;/p&gt;&#xA;&lt;br&gt;&#xA;&lt;h1 id=&#34;store-your-passwords&#34;&gt;Store your passwords&lt;/h1&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;If you want to use a password manager, &lt;strong&gt;DON&amp;rsquo;T USE ANY CLOUD BASED SERVICES&lt;/strong&gt;: What&amp;rsquo;s the point of having strong passwords &lt;u&gt;if you store them on anyone else&amp;rsquo;s computer?&lt;/u&gt; If you really want a remote password manager accessible from anywhere, I recommend &lt;strong&gt;Vaultwarden&lt;/strong&gt; (which is a &lt;strong&gt;Bitwarden&lt;/strong&gt; reimplementation)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hardening SSH</title>
+      <link>http://localhost:1313/hardening_ssh/</link>
+      <pubDate>Tue, 25 Feb 2025 00:06:32 +0100</pubDate>
+      <guid>http://localhost:1313/hardening_ssh/</guid>
+      <description>&lt;hr&gt;&#xA;&lt;p&gt;First thing we want is to do is &lt;strong&gt;disable root login&lt;/strong&gt; on your machine. Before proceeding, create a new user with the command:&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;useradd -m &amp;lt;user&amp;gt;&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;then create a &lt;strong&gt;STRONG&lt;/strong&gt; password for it. You don&amp;rsquo;t wan&amp;rsquo;t someone to guess your password. I recommend a randomly generated password + a password manager to store it.&lt;/p&gt;&#xA;&lt;p&gt;Next, we want to &lt;strong&gt;disable password authentication&lt;/strong&gt;, we will authenticate using an &lt;strong&gt;SSH Key&lt;/strong&gt;. This means that only computers with approved SSH keys will be able to connect.&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>
