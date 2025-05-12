@@ -10,6 +10,8 @@
 If you&rsquo;re using Cloudflare as your domain registrar, there&rsquo;s a lot of tools you can use to prevent malicious requests, bots, crawlers and script kiddies.
 Exclude requests not from your country
 
+
+⚠️ This is security by obscurity. Hardening your Cloudflare configuration does not mean you&rsquo;re fully protected. Please secure your services properly and always setup a login page within your services or using an authentication portal like Authelia, Authentik or Keycloak.
 First of all, if you&rsquo;re using your domain just to expose some apps to the internet, like Jellyfin or Immich for your friends or family, it is likely that the only legitimate requests made to your domain comes only comes from the country you live in. Requests from other countries are probably unwanted, unless you&rsquo;re using a VPN.">
 	<meta name="keywords" content="Security, Networking">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,6 +33,8 @@ First of all, if you&rsquo;re using your domain just to expose some apps to the 
 <p>If you&rsquo;re using Cloudflare as your domain registrar, there&rsquo;s a lot of tools you can use to prevent malicious requests, bots, crawlers and script kiddies.</p>
 <h1 id="exclude-requests-not-from-your-country">Exclude requests not from your country</h1>
 <hr>
+<blockquote>
+<p>⚠️ This is <strong>security by obscurity</strong>. Hardening your Cloudflare configuration <strong>does not mean</strong> you&rsquo;re fully protected. Please secure your services properly and always setup a login page within your services or using an authentication portal like <a href="https://www.authelia.com/">Authelia</a>, <a href="https://goauthentik.io/">Authentik</a> or <a href="https://www.keycloak.org/">Keycloak</a>.</p></blockquote>
 <p>First of all, if you&rsquo;re using your domain just to expose some apps to the internet, like <em><strong>Jellyfin</strong></em> or <em><strong>Immich</strong></em> for your friends or family, it is likely that the only legitimate requests made to your domain comes only comes from the country you live in. Requests from other countries are probably unwanted, unless you&rsquo;re using a VPN.</p>
 <p>To filter these out, go to your <a href="https://dash.cloudflare.com">Cloudflare dashboard</a> and select your <strong>domain</strong>. In the sidebar, select <strong>Security</strong> &gt; <strong>WAF</strong> and <strong>Create rule</strong><br></p>
 <p>Give it a name, then select:</p>
@@ -48,7 +52,7 @@ Expression Preview should look like: <pre><code class="conf">(ip.geoip.country n
 <p>⚠️ If you&rsquo;re using VPNs you could be blocked from accessing your domain.</p></blockquote>
 <h1 id="block-malicious-requests">Block malicious requests</h1>
 <hr>
-<p>We can also block url containing certain words like <strong>gpg</strong>, <strong>curl</strong>, <strong>wget</strong>, <strong>&lt;script</strong>, <strong>&lt;?php</strong>, <strong>fopen</strong>, <strong>exec</strong>, etc.. These requests are probably malicious and <strong>made by scripts scanning the internet to find vulnerable websites.</strong><br></p>
+<p>We can also block url containing certain words like <strong>gpg</strong>, <strong>curl</strong>, <strong>wget</strong>, <strong>&lt;script</strong>, <strong>&lt;?php</strong>, <strong>fopen</strong>, <strong>exec</strong>, etc.. These requests are probably malicious and <strong>made by scripts constantly scanning the internet to find vulnerable websites.</strong><br></p>
 <p>To <strong>block these (probably) malicious requests</strong>, as before, go to your <a href="https://dash.cloudflare.com">Cloudflare dashboard</a> and select your <strong>domain</strong>. In the sidebar, select <strong>Security</strong> &gt; <strong>WAF</strong> and <strong>Create rule</strong>. Name it however you like.<br></p>
 <p>Next to <strong>Expression preview</strong>, click on <strong>Edit expression</strong>, then paste (<u>don&rsquo;t paste the &lsquo;<strong>#</strong>&rsquo;</u>):</p>
 <pre tabindex="0"><code>

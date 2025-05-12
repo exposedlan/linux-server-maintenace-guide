@@ -11,6 +11,8 @@ If you're using Cloudflare as your domain registrar, there's a lot of tools you 
 # Exclude requests not from your country
 ---
 
+> ⚠️ This is **security by obscurity**. Hardening your Cloudflare configuration **does not mean** you're fully protected. Please secure your services properly and always setup a login page within your services or using an authentication portal like [Authelia](https://www.authelia.com/), [Authentik](https://goauthentik.io/) or [Keycloak](https://www.keycloak.org/).
+
 First of all, if you're using your domain just to expose some apps to the internet, like ***Jellyfin*** or ***Immich*** for your friends or family, it is likely that the only legitimate requests made to your domain comes only comes from the country you live in. Requests from other countries are probably unwanted, unless you're using a VPN.
 
 To filter these out, go to your [Cloudflare dashboard](https://dash.cloudflare.com) and select your **domain**. In the sidebar, select **Security** > **WAF** and **Create rule**<br>
@@ -35,7 +37,7 @@ Save the WAF rule and voilà! Any requests that does not come from an IP from th
 # Block malicious requests
 ---
 
-We can also block url containing certain words like **gpg**, **curl**, **wget**, **\<script**, **<?php**, **fopen**, **exec**, etc.. These requests are probably malicious and **made by scripts scanning the internet to find vulnerable websites.**<br>
+We can also block url containing certain words like **gpg**, **curl**, **wget**, **\<script**, **<?php**, **fopen**, **exec**, etc.. These requests are probably malicious and **made by scripts constantly scanning the internet to find vulnerable websites.**<br>
 
 To **block these (probably) malicious requests**, as before, go to your [Cloudflare dashboard](https://dash.cloudflare.com) and select your **domain**. In the sidebar, select **Security** > **WAF** and **Create rule**. Name it however you like.<br>
 
